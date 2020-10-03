@@ -1,0 +1,11 @@
+<div class="container-fluid slider-container">
+  <owl-carousel-o [options]="customOptions">
+    <ng-template carouselSlide *ngFor="let item of sliderImages"> <img src="{{item.url}}" class="p-3"> </ng-template>
+  </owl-carousel-o>
+</div>
+
+
+
+<footer>
+ <app-footer></app-footer>
+</footer>
