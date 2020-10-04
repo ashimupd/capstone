@@ -11,6 +11,7 @@ export class SignupComponent {
   public signupFormGroup: FormGroup;
 
   hide = true;
+  weakpassword = false;
   districts = [
     { district: 'Achham' },
     { district: 'Arghakhanchi' },
@@ -87,7 +88,7 @@ export class SignupComponent {
     { district: 'Taplejung' },
     { district: 'Terhathum' },
     { district: 'Udayapur' }
-  ]
+  ];
 
   constructor(private loginFormBuilder: FormBuilder) {
     this.signupFormGroup = this.loginFormBuilder.group({
@@ -104,7 +105,7 @@ export class SignupComponent {
 
       phone: ['', [
         Validators.required,
-        Validators.pattern('([0-9 + -]+).{7,}')
+        Validators.pattern('[+ 0-9].{9,15}')
 
       ]],
 
@@ -124,11 +125,7 @@ export class SignupComponent {
 
       password: ['', [
         Validators.required,
-
-      ]],
-
-      cpassword: ['', [
-        Validators.required
+        Validators.pattern('.{8,}'),
       ]],
     })
   }
@@ -136,5 +133,8 @@ export class SignupComponent {
   submitSignup() {
     console.log(this.signupFormGroup.value);
   }
+
+
+
 
 }

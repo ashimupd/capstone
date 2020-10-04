@@ -33,6 +33,10 @@
         Enter your phone number *
       </mat-error>
 
+      <mat-error *ngIf="signupFormGroup.controls.phone.touched && signupFormGroup.controls.phone.hasError('pattern')">
+        Enter Valid number *
+      </mat-error>
+
       <mat-form-field appearance="outline" class="w-100">
         <mat-label>Phone number </mat-label>
         <input matInput placeholder="Enter your phone number *" type="text" formControlName="phone">
@@ -96,24 +100,15 @@
         Enter your password *
       </mat-error>
 
+      <mat-error style="font-size: small;"
+        *ngIf="signupFormGroup.controls.password.touched && signupFormGroup.controls.password.hasError('pattern')">
+       Enter more than 8 charcahters
+      </mat-error>
+
+
       <mat-form-field appearance="outline" class="w-100">
         <mat-label>Password </mat-label>
         <input matInput placeholder="Enter your password *" [type]="hide?'password':'text'" formControlName="password">
-        <mat-icon style="cursor: pointer;" matSuffix (click)="hide=!hide">{{hide ? 'visibility_off' : 'visibility'}}
-        </mat-icon>
-      </mat-form-field>
-
-
-      <!-- Confirm password -->
-
-      <mat-error
-        *ngIf="signupFormGroup.controls.cpassword.touched && signupFormGroup.controls.cpassword.hasError('required')">
-        Re-enter your password *
-      </mat-error>
-
-      <mat-form-field appearance="outline" class="w-100">
-        <mat-label>Confirm password </mat-label>
-        <input matInput placeholder="Re-nter your password *" [type]="hide?'password':'text'" formControlName="cpassword">
         <mat-icon style="cursor: pointer;" matSuffix (click)="hide=!hide">{{hide ? 'visibility_off' : 'visibility'}}
         </mat-icon>
       </mat-form-field>

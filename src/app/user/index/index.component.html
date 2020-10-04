@@ -1,11 +1,46 @@
 <div class="container-fluid slider-container">
-  <owl-carousel-o [options]="customOptions">
+  <owl-carousel-o [options]="mainSliderOptions">
     <ng-template carouselSlide *ngFor="let item of sliderImages"> <img src="{{item.url}}" class="p-3"> </ng-template>
   </owl-carousel-o>
 </div>
 
 
+<div class="container new-arrivals mt-5">
+  <h3 class="w-100 text-center">New Arrivals</h3>
+  <owl-carousel-o [options]="newArivalSliderOptions">
+    <ng-template carouselSlide *ngFor="let item of sliderImages">
+      <mat-card class="text-center">
+        <a href="">
+          <img src="{{item.url}}" class="p-3">
+        </a>
+        <span class="w-100"> Rs. 500 </span>
+        <button mat-raised-button class="btn w-100"> <i class="fa fa-cart-plus"></i> Add to cart</button>
+      </mat-card>
+    </ng-template>
+  </owl-carousel-o>
+</div>
+
+
+<div class="best-sales text-center w-100 mt-5 mb-5">
+  <h3>Best sales</h3>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 mt-5 mb-5" *ngFor="let item of sliderImages | slice:0:loadMoreBestSales;">
+          <mat-card>
+            <a href="">
+              <img src="{{item.url}}" class="p-3 w-100">
+            </a>
+            <span class="w-100"> Rs. 500 </span>
+            <button mat-raised-button class="btn w-100"> <i class="fa fa-cart-plus"></i> Add to cart</button>
+          </mat-card>
+        </div>
+      </div>
+
+      <button mat-stroked-button (click)="loadMoreItems()">Load more ...</button>
+
+    </div>
+  </div>
 
 <footer>
- <app-footer></app-footer>
+  <app-footer></app-footer>
 </footer>

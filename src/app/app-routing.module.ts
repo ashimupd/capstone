@@ -1,4 +1,4 @@
-import { VendorModule } from './vendor/vendor.module';
+
 import { AdminModule } from './admin/admin.module';
 import { UserModule } from './user/user.module';
 import { NgModule } from '@angular/core';
@@ -15,10 +15,7 @@ const routes: Routes = [
     loadChildren: () => AdminModule
   },
 
-  {
-    path: 'vendor',
-    loadChildren: () => VendorModule
-  }
+
 ];
 
 @NgModule({
