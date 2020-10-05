@@ -1,12 +1,11 @@
 @media screen and (max-width: 800px) {
   .firstToolbar {
     text-align: left;
-    .gap {
-      flex: 0;
-    }
+
 
     .logo {
       flex: 2;
+      margin-left: 0%;
     }
     .search {
       display: none;
@@ -21,9 +20,7 @@
   }
 
 
-  .secondarySearchContainer {
-    display: inline;
-  }
+
 
   .secondToolbar {
     display: none;

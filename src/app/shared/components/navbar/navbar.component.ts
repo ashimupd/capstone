@@ -35,17 +35,13 @@ export class NavbarComponent {
   ];
 
   navLinks = [
-    { routerLink: '/paypal', navLikLabel: 'Paypal' },
-    { routerLink: '/netflix', navLikLabel: 'Netflix' },
-    { routerLink: '/prime', navLikLabel: 'Prime' },
-    { routerLink: '/vpn', navLikLabel: 'VPN' },
-    { routerLink: '/netflix', navLikLabel: 'Netflix' },
-    { routerLink: '/prime', navLikLabel: 'Prime' },
-    { routerLink: '/dipendra', navLikLabel: 'Dipendra' },
+    { routerLink: '/mobiles', navLikLabel: 'Mobiles' },
+    { routerLink: '/Laptop', navLikLabel: 'Laptop' },
+    { routerLink: '/watches', navLikLabel: 'Watches' },
+    { routerLink: '/man', navLikLabel: 'Man' },
+    { routerLink: '/women', navLikLabel: 'Women' },
+    { routerLink: '/kids', navLikLabel: 'Kids' },
   ];
-
-
-  message = '';
 
 
   constructor() {

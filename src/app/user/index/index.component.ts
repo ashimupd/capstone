@@ -9,7 +9,7 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 export class IndexComponent {
 
 
-  loadMoreBestSales: number = 8;
+  loadMoreBestSales = 4;
 
   mainSliderOptions: OwlOptions = {
     loop: true,

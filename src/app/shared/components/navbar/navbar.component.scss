@@ -9,16 +9,12 @@ main {
   color: black;
   display: flex;
   flex-direction: row;
+  text-align: left;
 
-  text-align: center;
-
-  .gap {
-    flex: 1;
-  }
   .logo {
-    flex: 1;
-    float: right;
+    flex: 4;
     font-family: "Courgette", cursive;
+    margin-left: 5%;
 
     a {
       cursor: pointer;
@@ -30,39 +26,13 @@ main {
       }
     }
   }
-  .search {
-    flex: 3;
-    background: rgb(170, 170, 170, 0.5);
-    border: none;
-    border-radius: 5px;
-    color: black;
-    font-family: "Antic Slab", serif;
-    font-family: "Righteous", cursive;
 
-    input {
-      border: none;
-      outline: none;
-      background: none;
-      font-size: 1.5vh;
-      float: left;
-      width: 85%;
-      padding: 5px;
-    }
-
-    button {
-      background: none;
-      outline: none;
-      border: none;
-      float: right;
-      color: grey;
-    }
-  }
   .actions {
+    flex: 1;
     display: flex;
     flex-direction: row;
 
     button {
-      flex: 1;
       background: none;
       outline: none;
       border: none;

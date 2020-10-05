@@ -1,20 +1,19 @@
 <main>
 
   <mat-toolbar class="firstToolbar">
-    <div class="gap"></div>
     <div class="logo">
       <a [routerLink]="['/']">
         <img src="assets/images/sitelogo.png" alt="">
       </a>
     </div>
-    <div class="search ml-3">
+    <!-- <div class="search ml-3">
       <input type="text" placeholder="Search items..." [(ngModel)]="term" (keyup)="ShowSearchResult($event)">
       <button mat-icon-button *ngIf="showSearchData" (click)="clearSearch()">
         <mat-icon>
           <fa-icon [icon]="faTimes"></fa-icon>
         </mat-icon>
       </button>
-    </div>
+    </div> -->
 
     <div class="actions ml-3">
 
@@ -40,11 +39,10 @@
         </mat-icon>
       </button>
     </div>
-    <div class="gap"></div>
   </mat-toolbar>
 
   <!-- secondary search bar -->
-  <div class="secondarySearchContainer">
+  <!-- <div class="secondarySearchContainer">
     <div class="secondary-search w-100">
       <input type="text" placeholder="Search items..." (keyup)="ShowSearchResult($event)" [(ngModel)]="term">
       <button mat-icon-button *ngIf="showSearchData" (click)="clearSearch()">
@@ -53,12 +51,12 @@
         </mat-icon>
       </button>
     </div>
-  </div>
+  </div> -->
 
 
   <!-- Showing search result -->
 
-  <div class="text-center search-data position-fixed" *ngIf="showSearchData">
+  <!-- <div class="text-center search-data position-fixed" *ngIf="showSearchData">
     <mat-card class="text-left" *ngFor="let searchItem of searchedItems" routerLink="[/about]">
       <p>
         <img [src]="searchItem.image" [alt]="searchItem.name" class=" search-image img-fluid">
@@ -66,7 +64,7 @@
       </p>
 
     </mat-card>
-  </div>
+  </div> -->
 
 
   <!-- Main nav bar -->

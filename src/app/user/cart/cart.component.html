@@ -1,0 +1,56 @@
+<section>
+  <div class="container-fluid mt-5 mb-5">
+    <div class="row">
+      <div class="col-sm-3 profile-nav text-center">
+
+        <div class="user-details">
+          <h5>asim@gmail.com</h5>
+          <h6>Ashim Updahay</h6>
+        </div>
+
+        <ul class="text-left">
+          <li><a [routerLink]="['/profile']"> <i class="fa fa-user-circle-o"></i> Profile </a> </li>
+          <li><a [routerLink]="['/orders']"> <i class="fa fa-first-order"></i> Order history</a></li>
+          <li><a [routerLink]="['/cart']" style="color: #F44336;"> <i class="fa fa-shopping-cart"></i> Cart </a></li>
+          <li><a href=""> <i class="fa fa-power-off"></i> Logout </a></li>
+        </ul>
+      </div>
+      <div class="col-sm-8 ml-1 text-center">
+
+        <input (keyup)="applyFilter($event)" placeholder="Search cart list" #input class="SearchFilterInput mb-3">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z13 w-100">
+
+          <ng-container matColumnDef="id">
+            <th class="text-left" mat-header-cell *matHeaderCellDef> Id </th>
+            <td class="text-left" mat-cell *matCellDef="let element"> {{element.id}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="name">
+            <th class="text-left" mat-header-cell *matHeaderCellDef> Name </th>
+            <td class="text-left" mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="class">
+            <th class="text-left" mat-header-cell *matHeaderCellDef> Class </th>
+            <td class="text-left" mat-cell *matCellDef="let element"> {{element.class}} </td>
+          </ng-container>
+
+          <tr class="text-left" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr class="text-left" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+          </tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100, 200]" showFirstLastButtons></mat-paginator>
+
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<app-footer></app-footer>
