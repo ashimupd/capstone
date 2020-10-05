@@ -24,7 +24,7 @@
       </button>
 
       <button class="ml-3">
-        <a  [routerLink]="['/login']">
+        <a [routerLink]="['/login']">
           <!-- <a href="/login"> -->
           <mat-icon>
             <fa-icon [icon]="faUser"></fa-icon>
@@ -41,30 +41,7 @@
     </div>
   </mat-toolbar>
 
-  <!-- secondary search bar -->
-  <!-- <div class="secondarySearchContainer">
-    <div class="secondary-search w-100">
-      <input type="text" placeholder="Search items..." (keyup)="ShowSearchResult($event)" [(ngModel)]="term">
-      <button mat-icon-button *ngIf="showSearchData" (click)="clearSearch()">
-        <mat-icon>
-          <fa-icon [icon]="faTimes"></fa-icon>
-        </mat-icon>
-      </button>
-    </div>
-  </div> -->
 
-
-  <!-- Showing search result -->
-
-  <!-- <div class="text-center search-data position-fixed" *ngIf="showSearchData">
-    <mat-card class="text-left" *ngFor="let searchItem of searchedItems" routerLink="[/about]">
-      <p>
-        <img [src]="searchItem.image" [alt]="searchItem.name" class=" search-image img-fluid">
-        <span class="search-text ml-5"> {{searchItem.name}} </span>
-      </p>
-
-    </mat-card>
-  </div> -->
 
 
   <!-- Main nav bar -->
@@ -73,7 +50,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm" *ngFor="let navLink of navLinks">
-          <a [routerLink]="[navLink.routerLink]"> {{navLink.navLikLabel}} </a>
+          <a [routerLink]="['categories/'+navLink.routerLink]" routerLinkActive="active"> {{navLink.navLikLabel}} </a>
         </div>
       </div>
     </div>
@@ -83,13 +60,13 @@
     <div class="container-fluid text-left">
       <div class="row">
         <div class="col-sm" *ngFor="let navLink of navLinks">
-          <a [routerLink]="[navLink.routerLink]"> {{navLink.navLikLabel}} </a>
+          <a [routerLink]="['categories/'+navLink.routerLink]" routerLinkActive="active"> {{navLink.navLikLabel}} </a>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- <app-userchat></app-userchat> -->
+
 
 
 

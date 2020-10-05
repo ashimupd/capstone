@@ -1,0 +1,51 @@
+<section>
+
+  <div class="itemlist text-center w-100 mt-5 mb-5">
+    <h3> {{Category}} </h3>
+
+
+    <div class="filter w-100">
+      <input (keyup)="applyFilter($event)"
+        placeholder="Type {{Category.toLocaleLowerCase()}} {{searchKeyWord}} to search " #input
+        class="SearchFilterInput mb-3 w-75">
+      <select (change)="changeSearchKeyword($event)">
+        <option value="name">Name</option>
+        <option value="price">Price</option>
+      </select>
+      <br>
+      <div class="sort">
+        <select (change)="sort($event)">
+          <option value="1">Ascending</option>
+          <option value="2">Descending</option>
+          <option value="3">Price high to low</option>
+          <option value="4">Price low to high</option>
+        </select>
+      </div>
+
+    </div>
+
+
+
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 mt-5 mb-5" *ngFor="let item of sliderImages | slice:0:loadMoreItems;">
+          <mat-card>
+            <a href="">
+              <img src="{{item.url}}" class="p-3 w-100">
+            </a>
+            <div class="w-100"> {{item.name}} </div>
+            <div class="w-100"> Rs. {{item.price}} </div>
+            <button mat-raised-button class="btn w-100"> <i class="fa fa-shopping-cart"></i> Add to cart</button>
+          </mat-card>
+        </div>
+      </div>
+
+      <button mat-stroked-button (click)="fnloadMoreItems()">Load more ...</button>
+    </div>
+  </div>
+
+</section>
+
+
+<app-footer></app-footer>

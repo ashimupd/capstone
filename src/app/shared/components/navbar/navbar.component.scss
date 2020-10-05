@@ -19,7 +19,7 @@ main {
     a {
       cursor: pointer;
 
-      img{
+      img {
         width: 5vh;
         height: 5vh;
         object-fit: cover;
@@ -55,62 +55,6 @@ main {
   }
 }
 
-.search-data {
-  font-family: "Antic Slab", serif;
-  font-family: "Righteous", cursive;
-  font-weight: bold;
-  width: 100%;
-  margin: auto;
-  font-size: 1.5vh;
-  z-index: 99;
-  // box-shadow: 50px 15px 25px black;
-  border-radius: 17px;
-  box-shadow: 29px 29px 57px #d4d4d4;
-
-  .search-image {
-    width: 5vh;
-    height: 5vh;
-    border-radius: 50%;
-  }
-
-  mat-card {
-    border: none;
-    outline: none;
-  }
-
-  mat-card:hover {
-    background: rgb(190, 190, 190);
-    cursor: pointer;
-    border: none;
-    outline: none;
-  }
-}
-
-.secondarySearchContainer {
-  display: none;
-  .secondary-search {
-    background: #cfcfcf;
-    border-radius: 5px;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-
-    input {
-      background: none;
-      color: black;
-      outline: none;
-      border: none;
-      width: 90%;
-      padding: 15px;
-    }
-
-    button {
-      outline: none;
-      width: 10%;
-    }
-  }
-}
-
 .secondToolbar {
   background: black;
   display: flex;
@@ -125,6 +69,10 @@ main {
     .row {
       .col-sm {
         padding: 1.5%;
+        .active {
+          color: #f44336;
+        }
+
         a {
           color: white;
           text-decoration: none;

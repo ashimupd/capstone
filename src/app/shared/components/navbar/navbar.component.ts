@@ -1,6 +1,7 @@
 
 
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { faUser, faShoppingCart, faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 
@@ -36,42 +37,18 @@ export class NavbarComponent {
 
   navLinks = [
     { routerLink: '/mobiles', navLikLabel: 'Mobiles' },
-    { routerLink: '/Laptop', navLikLabel: 'Laptop' },
+    { routerLink: '/laptops', navLikLabel: 'Laptop' },
     { routerLink: '/watches', navLikLabel: 'Watches' },
-    { routerLink: '/man', navLikLabel: 'Man' },
+    { routerLink: '/men', navLikLabel: 'Men' },
     { routerLink: '/women', navLikLabel: 'Women' },
     { routerLink: '/kids', navLikLabel: 'Kids' },
   ];
 
 
-  constructor() {
+  constructor(private route: ActivatedRoute) {
   }
 
 
-
-  // tslint:disable-next-line: typedef
-  ShowSearchResult(event) {
-    this.searchedItems = this.items.filter(result => result.name.toLocaleLowerCase().includes(this.term.toLocaleLowerCase()));
-
-    // Hide search data when text field is empty
-    if (this.term === '') {
-      this.showSearchData = false;
-    }
-    else {
-      this.showSearchData = true;
-
-    }
-    // Hide text data when back button is pressed and if the the search field in empty
-    const key = event.keyCode || event.charCode;
-    if (key === 8 || key === 46) {
-      if (this.term === '') {
-        this.showSearchData = false;
-      }
-      else {
-        this.showSearchData = true;
-      }
-    }
-  }
 
 
 
@@ -92,6 +69,9 @@ export class NavbarComponent {
     this.term = null;
     this.showSearchData = false;
   }
+
+
+
 }
 
 

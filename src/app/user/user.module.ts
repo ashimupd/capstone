@@ -2,7 +2,7 @@ import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 
 import { SharedModule } from './../shared/shared.module';
 import { Routes, RouterModule } from '@angular/router';
-import { NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IndexComponent } from './index/index.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
@@ -15,6 +15,7 @@ import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 import { ProfileComponent } from './profile/profile.component';
 import { CartComponent } from './cart/cart.component';
 import { OrdersComponent } from './orders/orders.component';
+import { CategoryComponent } from './category/category.component';
 
 
 const routes: Routes = [
@@ -45,12 +46,18 @@ const routes: Routes = [
   {
     path: 'orders',
     component: OrdersComponent
+  },
+
+  {
+    path: 'categories/:category',
+    component: CategoryComponent
+
   }
 ];
 
 
 @NgModule({
-  declarations: [IndexComponent, LoginComponent, SignupComponent, ProfileComponent, CartComponent, OrdersComponent],
+  declarations: [IndexComponent, LoginComponent, SignupComponent, ProfileComponent, CartComponent, OrdersComponent, CategoryComponent],
   imports: [
     SharedModule,
     RouterModule.forChild(routes),
