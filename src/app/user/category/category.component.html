@@ -3,27 +3,28 @@
   <div class="itemlist text-center w-100 mt-5 mb-5">
     <h3> {{Category}} </h3>
 
-
     <div class="filter w-100">
       <input (keyup)="applyFilter($event)"
-        placeholder="Type {{Category.toLocaleLowerCase()}} {{searchKeyWord}} to search " #input
+        placeholder="Type {{Category.toLocaleLowerCase()}} {{searchKeyWord}} to search . . . " #input
         class="SearchFilterInput mb-3 w-75">
+
       <select (change)="changeSearchKeyword($event)">
         <option value="name">Name</option>
         <option value="price">Price</option>
       </select>
+
       <br>
       <div class="sort">
+        <i class="fa fa-filter"></i>
         <select (change)="sort($event)">
-          <option value="1">Ascending</option>
-          <option value="2">Descending</option>
-          <option value="3">Price high to low</option>
           <option value="4">Price low to high</option>
+          <option value="3">Price high to low</option>
+          <option value="2">Descending</option>
+          <option value="1">Ascending</option>
         </select>
       </div>
 
     </div>
-
 
 
 
