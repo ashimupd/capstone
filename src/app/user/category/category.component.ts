@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 export class CategoryComponent {
 
   loadMoreItems = 4;
+  subCategory: string;
   Category: string;
   searchKeyWord = 'name';
 
@@ -95,8 +96,8 @@ export class CategoryComponent {
 
     this.route.snapshot.paramMap.get('category');
     this.route.paramMap.subscribe(params => {
-      this.Category = params.get('category').toString().toUpperCase();;
-
+      this.subCategory = params.get('subcategory').toString().toUpperCase();
+      this.Category = params.get('category').toString().toUpperCase();
     })
 
   }

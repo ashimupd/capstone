@@ -49,7 +49,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'categories/:category',
+    path: 'categories/:category/:subcategory',
     component: CategoryComponent
 
   }

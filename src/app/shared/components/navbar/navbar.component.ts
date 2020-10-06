@@ -44,6 +44,41 @@ export class NavbarComponent {
     { routerLink: '/kids', navLikLabel: 'Kids' },
   ];
 
+  ElectronisMenu = [
+    { routerLink: '/mobiles', navLinkLabel: 'Mobiles' },
+    { routerLink: '/laptop', navLinkLabel: 'Laptop' },
+    { routerLink: '/tablet', navLinkLabel: 'Tablet' },
+    { routerLink: '/tv', navLinkLabel: 'Tv' },
+  ];
+
+  ClothingsMenu = [
+    { routerLink: '/men', navLinkLabel: 'Men' },
+    { routerLink: '/women', navLinkLabel: 'Women' },
+    { routerLink: '/kids', navLinkLabel: 'Kids' },
+  ];
+
+
+  WatchesMenu = [
+    { routerLink: '/men', navLinkLabel: 'Men' },
+    { routerLink: '/women', navLinkLabel: 'Women' },
+  ];
+
+
+  ShoesMenu = [
+    { routerLink: '/men', navLinkLabel: 'Men' },
+    { routerLink: '/women', navLinkLabel: 'Women' },
+    { routerLink: '/kids', navLinkLabel: 'Kids' },
+  ];
+
+  GroceriesMenu = [
+    { routerLink: '/fruits', navLinkLabel: 'Fruits' },
+    { routerLink: '/vegetables', navLinkLabel: 'Vegetables' },
+  ];
+
+
+
+
+
 
   constructor(private route: ActivatedRoute) {
   }

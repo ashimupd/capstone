@@ -55,7 +55,7 @@ main {
   }
 }
 
-.secondToolbar {
+.secondToolbar, .thirdToolbar {
   background: black;
   display: flex;
   flex-direction: row;
@@ -69,48 +69,18 @@ main {
     .row {
       .col-sm {
         padding: 1.5%;
-        .active {
-          color: #f44336;
+        button {
+          outline: none;
+          border: none;
         }
 
-        a {
-          color: white;
-          text-decoration: none;
-          font-size: 1.5vh;
-        }
-        a:hover {
-          transition: 0.2s ease-in-out all;
-          color: #f44336;
-        }
       }
     }
   }
 }
 
-.thirdToolbar {
-  background: black;
-  display: flex;
-  flex-direction: row;
-  text-align: left;
-  font-family: "Antic Slab", serif;
-  font-family: "Righteous", cursive;
-  color: white;
 
-  .container-fluid {
-    text-align: center;
-    .row {
-      .col-sm {
-        padding: 1.5%;
-        a {
-          color: white;
-          text-decoration: none;
-          font-size: 1.5vh;
-        }
-        a:hover {
-          transition: 0.2s ease-in-out all;
-          color: #f44336;
-        }
-      }
-    }
-  }
+
+.active{
+  color: red;
 }
