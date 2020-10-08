@@ -10,7 +10,6 @@ export class SingleprodductComponent implements OnInit {
   totalItems = 1;
   pageUrl = window.location.href;
   panelOpenState = false;
-  commentUser: string;
   commentText: string;
 
   date = new Date();
@@ -25,26 +24,35 @@ export class SingleprodductComponent implements OnInit {
     { name: 'Asmim Updahay', comment: 'This is nice product', date: this.date },
     { name: 'Bibash katel', comment: 'This is average product', date: this.date },
     { name: 'Biebek chamlagain', comment: 'This is bad product', date: this.date },
-
   ]
 
-  plusItems() {
-    this.totalItems++;
-  }
-
-  minusItems() {
-    if (this.totalItems <= 1) {
-      return;
-    }
-    this.totalItems--;
+  postComment() {
+    let commentsss = {
+      name: 'Bikash', comment: this.commentText, date: this.date
+    };
+    this.commentsSample.sort();
+    this.commentsSample.unshift(commentsss);
 
   }
 
-  constructor() {
 
-  }
+plusItems() {
+  this.totalItems++;
+}
 
-  ngOnInit(): void {
+minusItems() {
+  if (this.totalItems <= 1) {
+    return;
   }
+  this.totalItems--;
+
+}
+
+constructor() {
+
+}
+
+ngOnInit(): void {
+}
 
 }

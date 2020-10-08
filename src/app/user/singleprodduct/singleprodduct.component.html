@@ -82,8 +82,8 @@
             <div class="comment-details w-100">
 
               <div class="post-comment w-100  p-3">
-                <input type="text" [(ngModel)]="commentUser" class="comment-user" placeholder="Type your comment . . .">
-                <button type="button"> <i class="fa fa-send"></i> </button>
+                <input type="text" [(ngModel)]="commentText" class="comment-user" placeholder="Type your comment . . .">
+                <button type="button"> <i class="fa fa-send" (click)="postComment()"></i> </button>
               </div>
 
               <div class="comment w-100 p-3 mt-3 mb-3" style="background-color: lightgrey; border-radius: 30px;"
