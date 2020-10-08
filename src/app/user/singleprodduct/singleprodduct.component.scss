@@ -1,0 +1,76 @@
+section {
+  .product-container {
+    box-shadow: 20px 20px 22px #cccccc, -20px -20px 22px #ffffff;
+    border-radius: 5px;
+    margin-top: 3%;
+    margin-bottom: 5%;
+
+    ::ng-deep {
+      .mat-form-field-appearance-outline .mat-form-field-outline,
+      .mat-checkbox-checked.mat-accent
+        .mat-checkbox-ripple
+        .mat-ripple-element {
+        color: black;
+      }
+    }
+
+    .image {
+      img {
+        height: 40vh;
+        object-fit: cover;
+      }
+    }
+    .details {
+
+      margin-left: 4%;
+      display: flex;
+      flex-direction: column;
+    }
+    .items-count {
+      display: flex;
+      flex-direction: row;
+
+      button {
+        flex: 1;
+      }
+    }
+
+    .share-to-social-media {
+      display: flex;
+      flex-direction: row;
+      span {
+        flex: 1;
+      }
+    }
+    .comments-container {
+      .post-comment {
+        border: 1px solid rgb(141, 141, 141);
+        border-radius: 25px;
+        input {
+          width: 90%;
+          border: none;
+          outline: none;
+        }
+        button {
+          width: 10%;
+          outline: none;
+          border: none;
+          background: none;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .product-container {
+    margin-top: 2%;
+    margin-bottom: 2%;
+    .image {
+      text-align: center;
+    }
+    .details{
+      margin-left: 4%;
+    }
+  }
+}

@@ -16,6 +16,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { CartComponent } from './cart/cart.component';
 import { OrdersComponent } from './orders/orders.component';
 import { CategoryComponent } from './category/category.component';
+import { SingleprodductComponent } from './singleprodduct/singleprodduct.component';
 
 
 const routes: Routes = [
@@ -50,14 +51,21 @@ const routes: Routes = [
 
   {
     path: 'categories/:category/:subcategory',
-    component: CategoryComponent
+    component: CategoryComponent,
 
+  },
+  {
+    path: 'categories/:category/:subcategory/:productid',
+    component: SingleprodductComponent
   }
+
+
+
 ];
 
 
 @NgModule({
-  declarations: [IndexComponent, LoginComponent, SignupComponent, ProfileComponent, CartComponent, OrdersComponent, CategoryComponent],
+  declarations: [IndexComponent, LoginComponent, SignupComponent, ProfileComponent, CartComponent, OrdersComponent, CategoryComponent, SingleprodductComponent],
   imports: [
     SharedModule,
     RouterModule.forChild(routes),
