@@ -33,11 +33,13 @@
     "bootstrap": "^4.5.2",
     "font-awesome": "^4.7.0",
     "jquery": "^3.5.1",
+    "ng-spin-kit": "^5.1.1",
     "ngx-facebook": "^3.0.0-0",
     "ngx-owl-carousel-o": "^4.0.0",
     "ngx-sharebuttons": "^8.0.1",
     "rxjs": "~6.5.5",
     "socket.io": "^2.3.0",
+    "spinkit": "^2.0.1",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
   },

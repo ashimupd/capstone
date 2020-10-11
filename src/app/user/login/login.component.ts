@@ -1,6 +1,7 @@
 import { LoginService } from './login.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -40,11 +41,13 @@ export class LoginComponent {
     this.loading = true;
     this.loginService.submitLogin(this.LoginFormGroup.value).subscribe((userdata: any) => {
       if (!userdata.success) {
+        this.loading = false;
         this.responseText = userdata.message;
         this.responseStatus = true;
         this.loading = false;
       }
       else {
+        this.loading = false;
         this.responseStatus = false;
         const userSessionData = {
           loggedin: true,
@@ -55,6 +58,10 @@ export class LoginComponent {
         localStorage.setItem('LOGGEDIN_USER_DATA', JSON.stringify(userSessionData));
 
       }
+    }, (error: HttpErrorResponse) => {
+      this.loading = false;
+      this.responseStatus = true;
+      this.responseText = error.statusText;
     });
   }
 

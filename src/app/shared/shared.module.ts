@@ -53,9 +53,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FooterComponent } from './components/footer/footer.component';
-
+import { NgSpinKitModule } from 'ng-spin-kit';
+import { LoadingscreenComponent } from './components/loadingscreen/loadingscreen.component';
 @NgModule({
-  declarations: [NavbarComponent, FooterComponent],
+  declarations: [NavbarComponent, FooterComponent, LoadingscreenComponent],
   imports: [
     CommonModule,
     HttpClientModule,
@@ -162,7 +163,8 @@ import { FooterComponent } from './components/footer/footer.component';
     ScrollingModule,
     NavbarComponent,
     FontAwesomeModule,
-    FooterComponent
+    FooterComponent,
+    LoadingscreenComponent
   ]
 })
 export class SharedModule { }

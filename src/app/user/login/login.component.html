@@ -1,6 +1,5 @@
-
-
 <div class="login-container">
+
 
   <mat-card>
     <h1 class="text-center">Login </h1>
@@ -43,12 +42,12 @@
       <button type="submit" class="btn btn-dark w-100 p-2 mt-2 mb-2" [disabled]="!LoginFormGroup.valid"> Login </button>
 
 
-
       <div class="text-center mt-2"> Not yet a member?
         <a [routerLink]="['/signup']">
           Click here to signup </a>
       </div>
 
+      <app-loadingscreen *ngIf="loading"></app-loadingscreen>
 
 
     </form>
