@@ -1,4 +1,5 @@
-import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
+import { LoginService } from './login/login.service';
+import { HttpClient, HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 
 import { SharedModule } from './../shared/shared.module';
 import { Routes, RouterModule } from '@angular/router';
@@ -72,11 +73,11 @@ const routes: Routes = [
     CommonModule,
     CarouselModule,
     FormsModule,
-    ShareButtonsModule.withConfig({
-      debug: true
-    }),
-    ShareIconsModule
+    ShareIconsModule,
 
+  ],
+  providers:[
+    LoginService
   ]
 })
 export class UserModule { }

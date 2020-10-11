@@ -1,13 +1,18 @@
+
+
 <div class="login-container">
 
   <mat-card>
     <h1 class="text-center">Login </h1>
     <form [formGroup]="LoginFormGroup" (submit)="submitLogin()">
 
-      <mat-error
-      *ngIf="LoginFormGroup.controls.email.touched && LoginFormGroup.controls.email.hasError('required')">
-      Enter your email *
-    </mat-error>
+      <div *ngIf="responseStatus" class="alert alert-danger text-center" role="alert">
+        {{responseText}}
+      </div>
+
+      <mat-error *ngIf="LoginFormGroup.controls.email.touched && LoginFormGroup.controls.email.hasError('required')">
+        Enter your email *
+      </mat-error>
 
       <mat-form-field appearance="outline" class="w-100">
         <mat-label>Email *</mat-label>
@@ -18,9 +23,9 @@
 
 
       <mat-error
-      *ngIf="LoginFormGroup.controls.password.touched && LoginFormGroup.controls.password.hasError('required')">
-      Enter your password *
-    </mat-error>
+        *ngIf="LoginFormGroup.controls.password.touched && LoginFormGroup.controls.password.hasError('required')">
+        Enter your password *
+      </mat-error>
 
       <mat-form-field appearance="outline" class="w-100">
         <mat-label>Password *</mat-label>
@@ -43,6 +48,8 @@
         <a [routerLink]="['/signup']">
           Click here to signup </a>
       </div>
+
+
 
     </form>
   </mat-card>
