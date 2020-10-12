@@ -1,12 +1,30 @@
+
+
+
 <div class="signup-container mb-5">
 
   <mat-card>
     <h1 class="text-center">signup </h1>
-    <form [formGroup]="signupFormGroup" (submit)="submitSignup()">
+
+    <app-loadingscreen *ngIf="loading"></app-loadingscreen>
+
+    <form *ngIf="!loading" [formGroup]="signupFormGroup" (submit)="submitSignup()">
+
+      <div *ngIf="responseFailed" class="alert alert-danger text-center" role="alert">
+        {{responseText}}
+      </div>
+
+      <div *ngIf="responseSuccess" class="alert alert-success text-center" role="alert">
+        {{responseText}}  <a [routerLink]="['/login']">  Go to login </a>
+      </div>
 
       <!-- First name -->
       <mat-error *ngIf="signupFormGroup.controls.fname.touched && signupFormGroup.controls.fname.hasError('required')">
         Enter your first name *
+      </mat-error>
+
+      <mat-error *ngIf="signupFormGroup.controls.fname.touched && signupFormGroup.controls.fname.hasError('pattern')">
+        Enter valid first name *
       </mat-error>
 
       <mat-form-field appearance="outline" class="w-100">
@@ -19,6 +37,10 @@
 
       <mat-error *ngIf="signupFormGroup.controls.lname.touched && signupFormGroup.controls.lname.hasError('required')">
         Enter your last name *
+      </mat-error>
+
+      <mat-error *ngIf="signupFormGroup.controls.lname.touched && signupFormGroup.controls.lname.hasError('pattern')">
+        Enter valid last name *
       </mat-error>
 
       <mat-form-field appearance="outline" class="w-100">
@@ -79,17 +101,19 @@
 
       <!-- Zip / Postal code -->
 
-      <mat-error *ngIf="signupFormGroup.controls.zip.touched && signupFormGroup.controls.zip.hasError('required')">
+      <mat-error
+        *ngIf="signupFormGroup.controls.postalcode.touched && signupFormGroup.controls.postalcode.hasError('required')">
         Enter your postal code *
       </mat-error>
 
-      <mat-error *ngIf="signupFormGroup.controls.zip.touched && signupFormGroup.controls.zip.hasError('pattern')">
+      <mat-error
+        *ngIf="signupFormGroup.controls.postalcode.touched && signupFormGroup.controls.postalcode.hasError('pattern')">
         Enter 5 digits postal code *
       </mat-error>
 
       <mat-form-field appearance="outline" class="w-100">
         <mat-label>Postal code </mat-label>
-        <input matInput placeholder="Enter your postal code  *" type="number" formControlName="zip">
+        <input matInput placeholder="Enter your postal code  *" type="number" formControlName="postalcode">
         <mat-icon matSuffix>location_on</mat-icon>
       </mat-form-field>
 
@@ -102,7 +126,7 @@
 
       <mat-error style="font-size: small;"
         *ngIf="signupFormGroup.controls.password.touched && signupFormGroup.controls.password.hasError('pattern')">
-       Enter more than 8 charcahters
+        Enter more than 8 charcahters
       </mat-error>
 
 

@@ -1,8 +1,11 @@
+
+
 <div class="login-container">
-
-
   <mat-card>
     <h1 class="text-center">Login </h1>
+
+
+
     <form [formGroup]="LoginFormGroup" (submit)="submitLogin()">
 
       <div *ngIf="responseStatus" class="alert alert-danger text-center" role="alert">
@@ -39,7 +42,8 @@
         <mat-checkbox class="float-left" (change)="rememberLogin($event)" color="primary">Remember me</mat-checkbox>
       </div>
 
-      <button type="submit" class="btn btn-dark w-100 p-2 mt-2 mb-2" [disabled]="!LoginFormGroup.valid"> Login </button>
+      <button *ngIf="!loading" type="submit" class="btn btn-dark w-100 p-2 mt-2 mb-2" [disabled]="!LoginFormGroup.valid"> Login </button>
+      <app-loadingscreen *ngIf="loading"></app-loadingscreen>
 
 
       <div class="text-center mt-2"> Not yet a member?
@@ -47,7 +51,6 @@
           Click here to signup </a>
       </div>
 
-      <app-loadingscreen *ngIf="loading"></app-loadingscreen>
 
 
     </form>

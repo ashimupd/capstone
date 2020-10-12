@@ -40,22 +40,37 @@ export class LoginComponent {
   submitLogin() {
     this.loading = true;
     this.loginService.submitLogin(this.LoginFormGroup.value).subscribe((userdata: any) => {
-      if (!userdata.success) {
+      if (userdata.success) {
+        this.loading = false;
+        this.responseStatus = false;
+
+        if (this.checked) {
+          const userSessionData = {
+            loggedin: true,
+            token: userdata.token,
+            userData: userdata
+          };
+
+          localStorage.setItem('LOGGEDIN_USER_DATA', JSON.stringify(userSessionData));
+        }
+
+        else {
+          const userSessionData = {
+            loggedin: false,
+            token: userdata.token,
+            userData: userdata
+          };
+
+          localStorage.setItem('LOGGEDIN_USER_DATA', JSON.stringify(userSessionData));
+        }
+
+
+      }
+      else {
         this.loading = false;
         this.responseText = userdata.message;
         this.responseStatus = true;
         this.loading = false;
-      }
-      else {
-        this.loading = false;
-        this.responseStatus = false;
-        const userSessionData = {
-          loggedin: true,
-          token: userdata.token,
-          userData: userdata
-        };
-
-        localStorage.setItem('LOGGEDIN_USER_DATA', JSON.stringify(userSessionData));
 
       }
     }, (error: HttpErrorResponse) => {
@@ -65,5 +80,15 @@ export class LoginComponent {
     });
   }
 
+  ngOnInit(): void {
+    const loggedInUserData = JSON.parse(localStorage.getItem('LOGGEDIN_USER_DATA'));
+    if (loggedInUserData === null) {
+      console.log('User has not set remembered me');
+    }
+    else {
+      console.log('User has set remembered me');
+    }
+
+  }
 
 }

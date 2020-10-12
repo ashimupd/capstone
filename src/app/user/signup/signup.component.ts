@@ -1,3 +1,5 @@
+import { SignupService } from './signup.service';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -9,6 +11,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class SignupComponent {
 
   public signupFormGroup: FormGroup;
+  responseSuccess: boolean;
+  responseFailed: boolean;
+  responseText: string;
+  loading: any;
+
 
   hide = true;
   weakpassword = false;
@@ -90,8 +97,8 @@ export class SignupComponent {
     { district: 'Udayapur' }
   ];
 
-  constructor(private loginFormBuilder: FormBuilder) {
-    this.signupFormGroup = this.loginFormBuilder.group({
+  constructor(private signUpFormBuilder: FormBuilder, private signUpService: SignupService) {
+    this.signupFormGroup = this.signUpFormBuilder.group({
 
       fname: ['', [
         Validators.required,
@@ -118,7 +125,7 @@ export class SignupComponent {
         Validators.required,
       ]],
 
-      zip: ['', [
+      postalcode: ['', [
         Validators.required,
         Validators.pattern('.{5,}')
       ]],
@@ -131,10 +138,29 @@ export class SignupComponent {
   }
 
   submitSignup() {
-    console.log(this.signupFormGroup.value);
+    this.loading = true;
+    this.signUpService.sugbmiSignUp(this.signupFormGroup.value).subscribe((userdata: any) => {
+      if (userdata.success) {
+        this.loading = false;
+        this.responseSuccess = true;
+        this.responseFailed = false;
+        this.responseText = userdata.message;
+      }
+      else {
+        this.loading = false;
+        this.responseFailed = true;
+        this.responseSuccess = false;
+        this.loading = false;
+        this.responseText = userdata.message;
+
+      }
+    }, (error: HttpErrorResponse) => {
+      this.loading = false;
+      this.responseFailed = true;
+      this.responseSuccess = false;
+      this.responseText = error.statusText;
+    });
   }
-
-
 
 
 }

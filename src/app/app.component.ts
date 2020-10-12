@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +7,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent {
 
-  title = 'vcc';
+  @HostListener('window:unload', ['$event'])
+  unloadHandler(event) {
+    // ...
+    const loggedInUserData = JSON.parse(localStorage.getItem('LOGGEDIN_USER_DATA'));
+    if (!loggedInUserData.loggedin) {
+      localStorage.removeItem('LOGGEDIN_USER_DATA');
+    }
+
+  }
+
+  @HostListener('window:beforeunload', ['$event'])
+  beforeUnloadHandler(event) {
+    // ...
+    const loggedInUserData = JSON.parse(localStorage.getItem('LOGGEDIN_USER_DATA'));
+    if (!loggedInUserData.loggedin) {
+      localStorage.removeItem('LOGGEDIN_USER_DATA');
+    }
+  }
 
 
 }

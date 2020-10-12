@@ -1,3 +1,4 @@
+import { SignupService } from './signup/signup.service';
 
 import { LoginService } from './login/login.service';
 import { HttpClient, HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
@@ -78,7 +79,7 @@ const routes: Routes = [
 
   ],
   providers:[
-    LoginService
+    LoginService, SignupService
   ]
 })
 export class UserModule { }
