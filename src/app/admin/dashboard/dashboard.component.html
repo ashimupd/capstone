@@ -1,0 +1,79 @@
+<section>
+  <h3 class="text-center">Admin dashboard <i class="fa fa-dashboard"></i> </h3>
+  <hr>
+
+  <div class="electronics-container mt-5 mb-5">
+    <div class="container-fluid">
+      <h4>  <span> <mat-icon svgIcon="electronics" inline="true" aria-hidden="false" class="icon-size"></mat-icon></span>
+        Electronics
+      </h4>
+      <div class="row electronics-items text-center">
+        <span *ngFor="let item of Electronics">
+          <a style="text-decoration: none;" [style.color]="item.fontColor"  [routerLink]="['electronics/'+item.routerLink]">
+            <i class="fa fa-2x {{item.faIcon}}"></i> <br> {{item.name}}
+          </a>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="clothings-container mt-5">
+    <div class="container-fluid">
+      <div class="w-100 m-auto">
+        <div class="text-center">
+          <a style="text-decoration: none; color: black;" [routerLink]="['clothings']">
+            <h4><mat-icon svgIcon="clothings" inline="true" aria-hidden="false" class="icon-size"></mat-icon>
+              Clothings
+            </h4>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="watches-container mt-5">
+    <div class="container-fluid">
+      <div class="w-100 m-auto">
+        <div  class="text-center">
+          <a style="text-decoration: none; color: black;" [routerLink]="['watches']">
+            <h4> <mat-icon svgIcon="watches" inline="true" aria-hidden="false" class="icon-size"></mat-icon>
+              Watches
+            </h4>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="shoes-container mt-5">
+    <div class="container-fluid">
+      <div class="w-100 m-auto">
+        <div   class="text-center">
+          <a style="text-decoration: none; color: black;" [routerLink]="['shoes']">
+            <h4> <mat-icon svgIcon="shoes" inline="true" aria-hidden="false" class="icon-size"></mat-icon>
+              Shoes
+            </h4>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="groceries-container mt-5 mb-5">
+    <div class="container-fluid">
+      <div class="w-100 m-auto">
+        <div  class="text-center">
+          <a style="text-decoration: none; color: black;"  [routerLink]="['groceries']">
+            <h4> <mat-icon svgIcon="groceries" inline="true" aria-hidden="false" class="icon-size"></mat-icon>
+              Groceries
+            </h4>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</section>

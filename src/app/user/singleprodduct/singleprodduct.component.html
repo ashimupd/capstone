@@ -1,3 +1,5 @@
+<app-navbar></app-navbar>
+
 <section>
   <div class="container product-container p-2">
     <div class="row">
@@ -77,6 +79,7 @@
             <h5>Comments <i class="fa fa-comment-o"></i> </h5>
           </mat-panel-title>
         </mat-expansion-panel-header>
+
         <div class="container">
           <div class="row comments-container">
             <div class="comment-details w-100">
@@ -87,13 +90,14 @@
               </div>
 
               <div class="comment w-100 p-3 mt-3 mb-3" style="background-color: lightgrey; border-radius: 30px;"
-                *ngFor="let comment of commentsSample">
+                *ngFor="let comment of commentsSample | slice :0:loadComments">
                 <span style="color: #0178D7;">{{comment.name}} :</span>
                 <span> {{comment.comment}} </span> <br>
                 <span style="color: rgb(94, 94, 94); font-size: small;"> {{comment.date}}</span>
               </div>
 
             </div>
+            <button class="text-center w-100 m-auto" mat-stroked-button (click)="loadMoreComments()">Load more ...</button>
           </div>
         </div>
 

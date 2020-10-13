@@ -11,6 +11,7 @@ export class SingleprodductComponent implements OnInit {
   pageUrl = window.location.href;
   panelOpenState = false;
   commentText: string;
+  loadComments = 5;
 
   date = new Date();
 
@@ -36,23 +37,23 @@ export class SingleprodductComponent implements OnInit {
   }
 
 
-plusItems() {
-  this.totalItems++;
-}
-
-minusItems() {
-  if (this.totalItems <= 1) {
-    return;
+  plusItems() {
+    this.totalItems++;
   }
-  this.totalItems--;
 
-}
+  minusItems() {
+    if (this.totalItems <= 1) {
+      return;
+    }
+    this.totalItems--;
 
-constructor() {
+  }
 
-}
+  loadMoreComments() {
+    this.loadComments = this.loadComments + 5;
+  }
 
-ngOnInit(): void {
-}
+  ngOnInit(): void {
+  }
 
 }
