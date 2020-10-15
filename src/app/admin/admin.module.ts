@@ -1,3 +1,4 @@
+import { ClothingsService } from './clothings/clothings.service';
 import { FormsModule } from '@angular/forms';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { SharedModule } from './../shared/shared.module';
@@ -17,18 +18,67 @@ import { GroceriesComponent } from './groceries/groceries.component';
 const routes: Routes = [
   {
     path: '',
-    component: DashboardComponent
+    component: DashboardComponent,
+  },
+  {
+    path: 'clothings',
+    component: ClothingsComponent
+  },
+  {
+    path: 'shoes',
+    component: ShoesComponent
+  },
+  {
+    path: 'watches',
+    component: WatchesComponent
+  },
+  {
+    path: 'groceries',
+    component: GroceriesComponent
+  },
+
+  {
+    path: 'electronics',
+    children: [
+      {
+        path: 'mobiles',
+        component: MobilesComponent
+      },
+      {
+        path: 'laptop',
+        component: LaptopComponent
+      },
+      {
+        path: 'tablet',
+        component: TabletComponent
+      },
+      {
+        path: 'tv',
+        component: TvComponent
+      },
+    ]
   }
 ];
 
 @NgModule({
-  declarations: [DashboardComponent, MobilesComponent, LaptopComponent, TabletComponent, TvComponent, ClothingsComponent, WatchesComponent, ShoesComponent, GroceriesComponent],
+  declarations: [DashboardComponent,
+    MobilesComponent,
+    LaptopComponent,
+    TabletComponent,
+    TvComponent,
+    ClothingsComponent,
+    WatchesComponent,
+    ShoesComponent,
+    GroceriesComponent],
   imports: [
     RouterModule.forChild(routes),
     SharedModule,
     CommonModule,
     CarouselModule,
     FormsModule,
+  ],
+  providers: [
+    ClothingsService
   ]
 })
 export class AdminModule { }

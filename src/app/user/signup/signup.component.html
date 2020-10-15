@@ -6,9 +6,7 @@
   <mat-card>
     <h1 class="text-center">signup </h1>
 
-    <app-loadingscreen *ngIf="loading"></app-loadingscreen>
-
-    <form *ngIf="!loading" [formGroup]="signupFormGroup" (submit)="submitSignup()">
+    <form  [formGroup]="signupFormGroup" (submit)="submitSignup()">
 
       <div *ngIf="responseFailed" class="alert alert-danger text-center" role="alert">
         {{responseText}}
@@ -81,18 +79,18 @@
 
 
 
-      <!-- District -->
+      <!-- state -->
 
       <mat-error
-        *ngIf="signupFormGroup.controls.district.touched && signupFormGroup.controls.district.hasError('required')">
-        Select your district *
+        *ngIf="signupFormGroup.controls.state.touched && signupFormGroup.controls.state.hasError('required')">
+        Select your state *
       </mat-error>
 
       <mat-form-field appearance="outline" class="w-100">
-        <mat-label>District</mat-label>
-        <mat-select formControlName="district">
-          <mat-option *ngFor="let district of districts" [value]="district.district">
-            {{district.district}}
+        <mat-label>state</mat-label>
+        <mat-select formControlName="state">
+          <mat-option *ngFor="let state of states" [value]="state.state">
+            {{state.state}}
           </mat-option>
         </mat-select>
         <mat-icon matSuffix>map</mat-icon>
@@ -102,18 +100,18 @@
       <!-- Zip / Postal code -->
 
       <mat-error
-        *ngIf="signupFormGroup.controls.postalcode.touched && signupFormGroup.controls.postalcode.hasError('required')">
+        *ngIf="signupFormGroup.controls.zip.touched && signupFormGroup.controls.zip.hasError('required')">
         Enter your postal code *
       </mat-error>
 
       <mat-error
-        *ngIf="signupFormGroup.controls.postalcode.touched && signupFormGroup.controls.postalcode.hasError('pattern')">
+        *ngIf="signupFormGroup.controls.zip.touched && signupFormGroup.controls.zip.hasError('pattern')">
         Enter 5 digits postal code *
       </mat-error>
 
       <mat-form-field appearance="outline" class="w-100">
         <mat-label>Postal code </mat-label>
-        <input matInput placeholder="Enter your postal code  *" type="number" formControlName="postalcode">
+        <input matInput placeholder="Enter your postal code  *" type="number" formControlName="zip">
         <mat-icon matSuffix>location_on</mat-icon>
       </mat-form-field>
 
@@ -140,9 +138,11 @@
 
       <!-- Submit button -->
 
-      <button type="submit" class="btn btn-dark w-100 p-2 mt-2 mb-2" [disabled]="!signupFormGroup.valid"> Sign up
+      <button *ngIf="!loading" type="submit" class="btn btn-dark w-100 p-2 mt-2 mb-2" [disabled]="!signupFormGroup.valid"> Sign up
       </button>
 
+
+      <app-loadingscreen *ngIf="loading"></app-loadingscreen>
 
 
       <div class="text-center mt-2"> Already a member?
