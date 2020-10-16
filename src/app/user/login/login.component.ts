@@ -33,9 +33,6 @@ export class LoginComponent {
 
   }
 
-  rememberLogin(event) {
-    this.checked = event.checked;
-  }
 
   submitLogin() {
     this.loading = true;
@@ -43,27 +40,16 @@ export class LoginComponent {
       if (userdata.success) {
         this.loading = false;
         this.responseStatus = false;
+        this.responseStatus = true;
+        this.responseText = userdata.message;
 
-        if (this.checked) {
-          const userSessionData = {
-            loggedin: true,
-            token: userdata.token,
-            userData: userdata
-          };
+        const userSessionData = {
+          loggedin: true,
+          token: userdata.token,
+          userData: userdata
+        };
 
-          localStorage.setItem('LOGGEDIN_USER_DATA', JSON.stringify(userSessionData));
-        }
-
-        else {
-          const userSessionData = {
-            loggedin: false,
-            token: userdata.token,
-            userData: userdata
-          };
-
-          localStorage.setItem('LOGGEDIN_USER_DATA', JSON.stringify(userSessionData));
-        }
-
+        localStorage.setItem('LOGGEDIN_USER_DATA', JSON.stringify(userSessionData));
 
       }
       else {
@@ -82,12 +68,7 @@ export class LoginComponent {
 
   ngOnInit(): void {
     const loggedInUserData = JSON.parse(localStorage.getItem('LOGGEDIN_USER_DATA'));
-    if (loggedInUserData === null) {
-      console.log('User has not set remembered me');
-    }
-    else {
-      console.log('User has set remembered me');
-    }
+    console.log(loggedInUserData)
 
   }
 

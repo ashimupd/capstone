@@ -1,17 +1,52 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable()
 export class ClothingsService {
   constructor(private http: HttpClient) { }
-  private url = 'http://localhost:8080/upload/image';
-  private url2 = 'http://localhost:8080/clothings';
 
-  uploadImage(clothingsImage){
-    return this.http.post(this.url, clothingsImage);
+  private url = 'http://localhost:2020/';
+
+  // tslint:disable-next-line: typedef
+  uploadImage(clothingsImage) {
+    return this.http.post(this.url + 'upload/image', clothingsImage);
   }
 
-  SubmitData(clothingsData){
-    return this.http.post(this.url2, clothingsData);
+  addItem(clothingsData, token) {
+    return this.http.post(this.url + 'clothings', clothingsData, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'bearer ' + token
+      })
+    });
   }
+
+  updateItem(clothingsData, token) {
+    return this.http.put(this.url + 'clothings', clothingsData, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'bearer ' + token
+      })
+    });
+  }
+
+  deleteItem(clothindData, token) {
+    return this.http.delete(this.url + 'clothings/' + clothindData.id,  {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'bearer ' + token
+      })
+    });
+  }
+
+  getallItems(token) {
+    return this.http.get(this.url + 'clothings', {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'bearer ' + token
+      })
+    });
+  }
+
+
 }

@@ -6,7 +6,7 @@ import { Observable, observable } from 'rxjs';
 export class LoginService {
 
   constructor(private http: HttpClient) { }
-  private url = 'http://localhost:8080/user/login';
+  private url = 'http://localhost:2020/user/login';
 
   submitLogin(userData: any){
     return this.http.post<any>(this.url, userData);

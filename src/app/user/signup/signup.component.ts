@@ -145,6 +145,13 @@ export class SignupComponent {
         this.responseSuccess = true;
         this.responseFailed = false;
         this.responseText = userdata.message;
+        this.signupFormGroup.controls.fname.setValue(null);
+        this.signupFormGroup.controls.lname.setValue(null);
+        this.signupFormGroup.controls.state.setValue(null);
+        this.signupFormGroup.controls.phone.setValue(null);
+        this.signupFormGroup.controls.zip.setValue(null);
+        this.signupFormGroup.controls.password.setValue(null);
+        this.signupFormGroup.controls.email.setValue(null);
       }
       else {
         this.loading = false;

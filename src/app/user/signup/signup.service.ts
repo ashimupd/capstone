@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 export class SignupService {
 
   constructor(private http: HttpClient) { }
-  private url = 'http://localhost:8080/user';
+  private url = 'http://localhost:2020/user';
 
   sugbmiSignUp(userData: any){
     return this.http.post<any>(this.url, userData);
