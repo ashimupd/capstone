@@ -1,3 +1,7 @@
+import { MobilesService } from './mobiles/mobiles.service';
+import { WatchesService } from './watches/watches.service';
+import { ShoesService } from './shoes/shoes.service';
+import { GroceriesService } from './groceries/groceries.service';
 import { ClothingsService } from './clothings/clothings.service';
 import { FormsModule } from '@angular/forms';
 import { CarouselModule } from 'ngx-owl-carousel-o';
@@ -78,7 +82,11 @@ const routes: Routes = [
     FormsModule,
   ],
   providers: [
-    ClothingsService
+    ClothingsService,
+    GroceriesService,
+    ShoesService,
+    WatchesService,
+    MobilesService
   ]
 })
 export class AdminModule { }

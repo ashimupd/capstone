@@ -26,6 +26,7 @@ export class ClothingsComponent implements OnInit {
   isAddingItem = true;
   buttonTextAndHeading: string;
 
+
   public previewUrl: any = null;
   private fileData: File = null;
   pageLoading: any;
