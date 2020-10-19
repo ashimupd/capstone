@@ -19,7 +19,8 @@ export class NavbarComponent {
   faTimes = faTimes;
 
 
-
+  loggedInUserData: any;
+  isUserLoggedIn: any;
   searchedItems = [];
   // ng model for search text
   term: any;
@@ -85,7 +86,15 @@ export class NavbarComponent {
 
 
 
+  ngOnInit(): void {
+    this.loggedInUserData = JSON.parse(window.localStorage.getItem('LOGGEDIN_USER_DATA'));
+    if (this.loggedInUserData) {
+      if (this.loggedInUserData.loggedin) {
+        this.isUserLoggedIn = true;
+      }
+    }
 
+  }
 
   openMenu() {
 

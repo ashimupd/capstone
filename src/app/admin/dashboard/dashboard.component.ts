@@ -19,6 +19,13 @@ export class DashboardComponent {
     { name: 'Tv', faIcon: 'fa-tv', routerLink: 'tv', fontColor: '#1E8139' },
   ];
 
+  Others = [
+    { name: 'Clothings', svgIcon: 'clothings', routerLink: 'clothings', },
+    { name: 'Watches', svgIcon: 'watches', routerLink: 'watches', },
+    { name: 'Shoes', svgIcon: 'shoes', routerLink: 'shoes', },
+    { name: 'Groceries', svgIcon: 'groceries', routerLink: 'groceries', },
+  ];
+
 
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, private http: HttpClient) {
     iconRegistry.addSvgIcon('electronics', sanitizer.bypassSecurityTrustResourceUrl(this.browseIcons + 'electronics.svg'));
@@ -26,6 +33,7 @@ export class DashboardComponent {
     iconRegistry.addSvgIcon('watches', sanitizer.bypassSecurityTrustResourceUrl(this.browseIcons + 'watches.svg'));
     iconRegistry.addSvgIcon('shoes', sanitizer.bypassSecurityTrustResourceUrl(this.browseIcons + 'shoes.svg'));
     iconRegistry.addSvgIcon('groceries', sanitizer.bypassSecurityTrustResourceUrl(this.browseIcons + 'groceries.svg'));
+    iconRegistry.addSvgIcon('indexpage', sanitizer.bypassSecurityTrustResourceUrl(this.browseIcons + 'indexpage.svg'));
 
   }
 }

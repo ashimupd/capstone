@@ -1,11 +1,11 @@
-.electronics-container {
+.electronics-container, .other-container  {
   background: #ffffff;
   box-shadow: 20px 20px 21px #e6e6e6, -20px -20px 21px #ffffff;
   .icon-size {
     width: 30px;
     height: 30px;
   }
-  .electronics-items {
+  .electronics-items,.other-items {
     display: flex;
     flex-direction: row;
     color: white;

@@ -1,3 +1,4 @@
+import { IndexService } from './index.service';
 import { Component, OnInit } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { OwlOptions } from 'ngx-owl-carousel-o';
@@ -8,9 +9,19 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 })
 export class IndexComponent {
 
+  constructor(private indexService: IndexService) {
+
+  }
+
+  Loading1 = true;
+  Loading2 = true;
+  Loading3 = true;
 
   loadMoreBestSales = 4;
 
+  public BASE_URL = 'http://localhost:2020/'
+
+  // tslint:disable-next-line: member-ordering
   mainSliderOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -43,6 +54,7 @@ export class IndexComponent {
 
 
 
+  // tslint:disable-next-line: member-ordering
   newArivalSliderOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -74,22 +86,61 @@ export class IndexComponent {
   }
 
 
-  sliderImages = [
-    { id: 1, url: 'assets/images/img1.jpg' },
-    { id: 2, url: 'assets/images/img2.jpg' },
-    { id: 3, url: 'assets/images/img3.jpg' },
-    { id: 4, url: 'assets/images/img4.jpg' },
-    { id: 5, url: 'assets/images/img5.jpg' },
-    { id: 5, url: 'assets/images/img5.jpg' },
-    { id: 5, url: 'assets/images/img5.jpg' },
-    { id: 5, url: 'assets/images/img5.jpg' },
-    { id: 5, url: 'assets/images/img5.jpg' },
-    { id: 5, url: 'assets/images/img5.jpg' },
-    { id: 5, url: 'assets/images/img5.jpg' },
-  ];
+  scrollingImages: any;
+
+  bestSalesImages: any;
+
+  newArrivals: any;
+
+
+
+
+
+  ngOnInit(): void {
+    this.getScrollingImageData();
+    this.getbestSalesData();
+    this.getnewarrivalsData();
+  }
 
 
   loadMoreItems() {
     this.loadMoreBestSales = this.loadMoreBestSales + 4;
+  }
+
+  getScrollingImageData() {
+    this.indexService.getDataByType('scrollingimage').subscribe((data: any) => {
+      if (data.success) {
+        this.Loading1 = false;
+        this.scrollingImages = data.data;
+      }
+      else {
+        this.Loading1 = true;
+      }
+    })
+  }
+
+  getnewarrivalsData() {
+    this.indexService.getDataByType('newarrivals').subscribe((data: any) => {
+      if (data.success) {
+        this.Loading2 = false;
+        this.newArrivals = data.data;
+      }
+      else {
+        this.Loading2 = true;
+      }
+    })
+  }
+
+  getbestSalesData() {
+    this.indexService.getDataByType('bestsales').subscribe((data: any) => {
+      if (data.success) {
+        this.Loading3 = false;
+        this.bestSalesImages = data.data;
+      }
+      else {
+        this.Loading3 = true;
+      }
+    })
+
   }
 }

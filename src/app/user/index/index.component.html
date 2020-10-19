@@ -1,23 +1,31 @@
 <app-navbar></app-navbar>
 
+
+
 <div class="container-fluid slider-container">
-  <owl-carousel-o [options]="mainSliderOptions">
-    <ng-template carouselSlide *ngFor="let item of sliderImages"> <img src="{{item.url}}" class="p-3"> </ng-template>
+  <app-loadingscreen *ngIf="Loading1"></app-loadingscreen>
+
+  <owl-carousel-o [options]="mainSliderOptions" *ngIf="!Loading1">
+    <ng-template carouselSlide *ngFor="let item of scrollingImages"> <img [src]="BASE_URL+'upload/images/'+ item.image"
+        class="p-3"> </ng-template>
   </owl-carousel-o>
 </div>
 
 
 <div class="container new-arrivals mt-5">
+
   <h3 class="w-100 text-center">New Arrivals</h3>
-  <owl-carousel-o [options]="newArivalSliderOptions">
-    <ng-template carouselSlide *ngFor="let item of sliderImages">
+
+  <app-loadingscreen *ngIf="Loading2"></app-loadingscreen>
+
+  <owl-carousel-o [options]="newArivalSliderOptions" *ngIf="!Loading2">
+    <ng-template carouselSlide *ngFor="let item of newArrivals">
       <mat-card class="text-center">
-        <a href="">
-          <img src="{{item.url}}" class="p-3">
+        <a>
+          <img [src]="BASE_URL+'upload/images/'+ item.image" class="p-3">
         </a>
-        <div class="w-100"> Grey pant </div>
-        <div class="w-100"> Rs. 500 </div>
-        <button mat-raised-button class="btn w-100"> <i class="fa fa-shopping-cart"></i> Add to cart</button>
+        <div class="w-100"> {{item.name}} </div>
+        <div class="w-100"> $ {{item.price}} </div>
       </mat-card>
     </ng-template>
   </owl-carousel-o>
@@ -26,43 +34,21 @@
 
 <div class="best-sales text-center w-100 mt-5 mb-5">
   <h3>Best sales</h3>
-  <div class="container-fluid">
+  <app-loadingscreen *ngIf="Loading3"></app-loadingscreen>
+  <div class="container-fluid" *ngIf="!Loading3">
     <div class="row">
-      <div class="col-sm-3 mt-5 mb-5" *ngFor="let item of sliderImages | slice:0:loadMoreBestSales;">
+      <div class="col-sm-3 mt-5 mb-5" *ngFor="let item of bestSalesImages | slice:0:loadMoreBestSales;">
         <mat-card>
-          <a href="">
-            <img src="{{item.url}}" class="p-3 w-100">
+          <a>
+            <img [src]="BASE_URL+'upload/images/'+ item.image" class="p-3 w-100">
           </a>
-          <div class="w-100"> Grey pant </div>
-          <div class="w-100"> Rs. 500 </div>
-          <button mat-raised-button class="btn w-100 mt-1"> <i class="fa fa-shopping-cart"></i> Add to cart</button>
+          <div class="w-100"> {{item.name}} </div>
+          <div class="w-100"> $ {{item.price}} </div>
         </mat-card>
       </div>
     </div>
 
     <button mat-stroked-button (click)="loadMoreItems()">Load more ...</button>
-
-
-
-
-
-
-    <!-- <share-buttons theme="material-dark" show="5" image="https://loremflickr.com/320/240"></share-buttons> -->
-
-<!--
-    <a class="btn btn-primary" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://google.com">
-      <i class=" fa fa-facebook"></i>
-    </a> -->
-<!--
-    <a href="" target="_blank" href="https://twitter.com/intent/tweet?url=https://www.facebook.com">
-      <i class="fa fa-twitter"></i>
-    </a> -->
-
-    <!-- <a href="" target="_blank" href="https://www.linkedin.com/shareArticle/?url=https://www.facebook.com">
-      <i class="fa fa-linkedin"></i>
-    </a> -->
-
-
 
 
   </div>

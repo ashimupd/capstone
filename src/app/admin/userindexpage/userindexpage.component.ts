@@ -1,18 +1,19 @@
-import { LaptopService } from './laptop.service';
-import { MatTableDataSource } from '@angular/material/table';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { MatSort } from '@angular/material/sort';
+import { UserindexpageService } from './userindexpage.service';
+
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-laptop',
-  templateUrl: './laptop.component.html',
-  styleUrls: ['./laptop.component.scss']
+  selector: 'app-userindexpage',
+  templateUrl: './userindexpage.component.html',
+  styleUrls: ['./userindexpage.component.scss']
 })
-export class LaptopComponent implements OnInit {
+export class UserindexpageComponent implements OnInit {
 
 
   private loggedInUserData: any;
@@ -20,7 +21,7 @@ export class LaptopComponent implements OnInit {
 
 
 
-  public laptopFormGroup: FormGroup;
+  public userIndexpageFormGroup: FormGroup;
   isAddingItem = true;
   buttonTextAndHeading: string;
 
@@ -34,21 +35,24 @@ export class LaptopComponent implements OnInit {
   responseFailed: boolean;
   responseText: string;
 
-  openForm = false;
-
   public BASE_URL = 'http://localhost:2020/';
 
 
+  type = [
+    { type: 'scrollingimage', name: 'Scrolling image' },
+    { type: 'newarrivals', name: 'New arrivals' },
+    { type: 'bestsales', name: 'Best sales' },
+  ];
 
-  displayedColumns: string[] = ['id', 'name', 'brand', 'model', 'ram', 'storage', 'processer', 'generation', 'graphics', 'resolution', 'screensize', 'price', 'warrenty', 'description', 'image', 'edit', 'delete'];
+  displayedColumns: string[] = ['id', 'name', 'type', 'price', 'description', 'image', 'edit', 'delete'];
   dataSource = new MatTableDataSource();
 
   constructor(
     public dialog: MatDialog,
-    private clothingFormBuilder: FormBuilder,
-    private laptopservice: LaptopService) {
+    private userIndexpageFormBuilder: FormBuilder,
+    private userIndexpageService: UserindexpageService) {
 
-    this.laptopFormGroup = this.clothingFormBuilder.group({
+    this.userIndexpageFormGroup = this.userIndexpageFormBuilder.group({
 
       id: [],
 
@@ -56,49 +60,15 @@ export class LaptopComponent implements OnInit {
         Validators.required,
       ]],
 
-      brand: ['', [
-        Validators.required,
-      ]],
-
-      model: ['', [
-        Validators.required,
-      ]],
-
-      ram: ['', [
-        Validators.required,
-      ]],
-
-      storage: ['', [
-        Validators.required,
-      ]],
-
-      processer: ['', [
-        Validators.required,
-      ]],
-
-      generation: ['', [
-        Validators.required,
-      ]],
-
-      graphics: ['', [
-        Validators.required,
-      ]],
-    
-      resolution: ['', [
-        Validators.required,
-      ]],
-
-      screensize: ['', [
-        Validators.required,
-      ]],
 
       price: ['', [
         Validators.required,
       ]],
 
-      warrenty: ['', [
+      type: ['', [
         Validators.required,
       ]],
+
 
       description: ['', [
         Validators.required,
@@ -112,7 +82,8 @@ export class LaptopComponent implements OnInit {
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild('deleteClothingConfirmDialouge') deleteClothingConfirmDialouge: TemplateRef<any>;
+  @ViewChild('addUpdateUserIndexpageFormDialouge') addUpdateUserIndexpageFormDialouge: TemplateRef<any>;
+  @ViewChild('deleteUserIndexpageConfirmDialouge') deleteUserIndexpageConfirmDialouge: TemplateRef<any>;
 
 
   applyFilter(event: Event) {
@@ -121,9 +92,6 @@ export class LaptopComponent implements OnInit {
   }
 
 
-  closeForm() {
-    this.openForm = false;
-  }
 
 
   ngOnInit(): void {
@@ -143,7 +111,7 @@ export class LaptopComponent implements OnInit {
 
   getAllItems() {
     this.pageLoading = true;
-    this.laptopservice.getallItems(this.token).subscribe((data: any) => {
+    this.userIndexpageService.getallItems(this.token).subscribe((data: any) => {
       if (data.success) {
         this.pageLoading = false;
         this.dataSource.data = data.data;
@@ -164,23 +132,14 @@ export class LaptopComponent implements OnInit {
   openUpdateItemFormDiaglouge(editformvalues) {
     this.isAddingItem = false;
     this.buttonTextAndHeading = 'Update item';
-    this.openForm = true;
+    this.dialog.open(this.addUpdateUserIndexpageFormDialouge);
 
 
-    this.laptopFormGroup.controls.id.setValue(editformvalues.id);
-    this.laptopFormGroup.controls.name.setValue(editformvalues.name);
-    this.laptopFormGroup.controls.brand.setValue(editformvalues.brand);
-    this.laptopFormGroup.controls.model.setValue(editformvalues.model);
-    this.laptopFormGroup.controls.ram.setValue(editformvalues.ram);
-    this.laptopFormGroup.controls.storage.setValue(editformvalues.storage);
-    this.laptopFormGroup.controls.processer.setValue(editformvalues.processer);
-    this.laptopFormGroup.controls.generation.setValue(editformvalues.generation);
-    this.laptopFormGroup.controls.graphics.setValue(editformvalues.graphics);
-    this.laptopFormGroup.controls.resolution.setValue(editformvalues.resolution);
-    this.laptopFormGroup.controls.screensize.setValue(editformvalues.screensize);
-    this.laptopFormGroup.controls.price.setValue(editformvalues.price);
-    this.laptopFormGroup.controls.warrenty.setValue(editformvalues.warrenty);
-    this.laptopFormGroup.controls.description.setValue(editformvalues.description);
+    this.userIndexpageFormGroup.controls.id.setValue(editformvalues.id);
+    this.userIndexpageFormGroup.controls.name.setValue(editformvalues.name);
+    this.userIndexpageFormGroup.controls.type.setValue(editformvalues.type);
+    this.userIndexpageFormGroup.controls.price.setValue(editformvalues.price);
+    this.userIndexpageFormGroup.controls.description.setValue(editformvalues.description);
 
 
     this.previewUrl = this.BASE_URL + 'upload/images/' + editformvalues.image;
@@ -191,22 +150,13 @@ export class LaptopComponent implements OnInit {
   openAddItemFormDiaglouge() {
     this.isAddingItem = true;
     this.buttonTextAndHeading = 'Add item';
-    this.openForm = true;
+    this.dialog.open(this.addUpdateUserIndexpageFormDialouge);
 
-    this.laptopFormGroup.controls.id.setValue(null);
-    this.laptopFormGroup.controls.name.setValue(null);
-    this.laptopFormGroup.controls.brand.setValue(null);
-    this.laptopFormGroup.controls.model.setValue(null);
-    this.laptopFormGroup.controls.ram.setValue(null);
-    this.laptopFormGroup.controls.storage.setValue(null);
-    this.laptopFormGroup.controls.processer.setValue(null);
-    this.laptopFormGroup.controls.generation.setValue(null);
-    this.laptopFormGroup.controls.graphics.setValue(null);
-    this.laptopFormGroup.controls.resolution.setValue(null);
-    this.laptopFormGroup.controls.screensize.setValue(null);
-    this.laptopFormGroup.controls.price.setValue(null);
-    this.laptopFormGroup.controls.warrenty.setValue(null);
-    this.laptopFormGroup.controls.description.setValue(null);
+    this.userIndexpageFormGroup.controls.id.setValue(null);
+    this.userIndexpageFormGroup.controls.name.setValue(null);
+    this.userIndexpageFormGroup.controls.type.setValue(null);
+    this.userIndexpageFormGroup.controls.price.setValue(null);
+    this.userIndexpageFormGroup.controls.description.setValue(null);
 
     this.previewUrl = null;
     this.imageNameFromServer = null;
@@ -214,8 +164,8 @@ export class LaptopComponent implements OnInit {
   }
 
   openDeleteItemFormDiaglouge(deletFormValue) {
-    this.laptopFormGroup.controls.id.setValue(deletFormValue.id);
-    this.dialog.open(this.deleteClothingConfirmDialouge);
+    this.userIndexpageFormGroup.controls.id.setValue(deletFormValue.id);
+    this.dialog.open(this.deleteUserIndexpageConfirmDialouge);
   }
 
 
@@ -230,7 +180,7 @@ export class LaptopComponent implements OnInit {
 
     if (imageSize > 100000000) {
 
-      window.alert('Image model is larger, please remodel it');
+      window.alert('Image size is larger, please resize it');
       this.signupAndUpdateLoading = false;
     }
 
@@ -245,7 +195,7 @@ export class LaptopComponent implements OnInit {
       const formData = new FormData();
       formData.append('image', this.fileData);
 
-      this.laptopservice.uploadImage(formData).subscribe((data: any) => {
+      this.userIndexpageService.uploadImage(formData).subscribe((data: any) => {
         this.signupAndUpdateLoading = false;
         this.imageNameFromServer = data.image;
 
@@ -268,7 +218,7 @@ export class LaptopComponent implements OnInit {
 
   }
 
-  submitClothingsData() {
+  submitUserIndexpageData() {
     if (this.isAddingItem) {
       this.addItem();
     }
@@ -281,24 +231,16 @@ export class LaptopComponent implements OnInit {
     // console.log(this.imageNameFromServer)
     this.signupAndUpdateLoading = true;
     const setFormData = {
-
-      name: this.laptopFormGroup.get('name').value,
-      model: this.laptopFormGroup.get('model').value,
-      brand: this.laptopFormGroup.get('brand').value,
-      ram: this.laptopFormGroup.get('ram').value,
-      storage: this.laptopFormGroup.get('storage').value,
-      processer: this.laptopFormGroup.get('processer').value,
-      generation: this.laptopFormGroup.get('generation').value,
-      graphics: this.laptopFormGroup.get('graphics').value,
-      resolution: this.laptopFormGroup.get('resolution').value,
-      screensize: this.laptopFormGroup.get('screensize').value,
-      price: this.laptopFormGroup.get('price').value,
-      warrenty: this.laptopFormGroup.get('warrenty').value,
-      description: this.laptopFormGroup.get('description').value,
       image: this.imageNameFromServer,
+      name: this.userIndexpageFormGroup.get('name').value,
+      price: this.userIndexpageFormGroup.get('price').value,
+      type: this.userIndexpageFormGroup.get('type').value,
+      description: this.userIndexpageFormGroup.get('description').value
     };
 
-    this.laptopservice.addItem(setFormData, this.token).subscribe((data: any) => {
+    console.log({ setFormData });
+
+    this.userIndexpageService.addItem(setFormData, this.token).subscribe((data: any) => {
       if (data.success) {
         this.signupAndUpdateLoading = false;
         this.responseSuccess = true;
@@ -330,26 +272,17 @@ export class LaptopComponent implements OnInit {
     // console.log(this.imageNameFromServer)
     this.signupAndUpdateLoading = true;
     const setFormData = {
-      id: this.laptopFormGroup.get('id').value,
-      name: this.laptopFormGroup.get('name').value,
-      model: this.laptopFormGroup.get('model').value,
-      brand: this.laptopFormGroup.get('brand').value,
-      ram: this.laptopFormGroup.get('ram').value,
-      storage: this.laptopFormGroup.get('storage').value,
-      processer: this.laptopFormGroup.get('processer').value,
-      generation: this.laptopFormGroup.get('generation').value,
-      graphics: this.laptopFormGroup.get('graphics').value,
-      resolution: this.laptopFormGroup.get('resolution').value,
-      screensize: this.laptopFormGroup.get('screensize').value,
-      price: this.laptopFormGroup.get('price').value,
-      warrenty: this.laptopFormGroup.get('warrenty').value,
-      description: this.laptopFormGroup.get('description').value,
+      id: this.userIndexpageFormGroup.get('id').value,
+      name: this.userIndexpageFormGroup.get('name').value,
+      price: this.userIndexpageFormGroup.get('price').value,
+      type: this.userIndexpageFormGroup.get('type').value,
+      description: this.userIndexpageFormGroup.get('description').value,
       image: this.imageNameFromServer,
     };
 
 
 
-    this.laptopservice.updateItem(setFormData, this.token).subscribe((data: any) => {
+    this.userIndexpageService.updateItem(setFormData, this.token).subscribe((data: any) => {
       if (data.success) {
         this.signupAndUpdateLoading = false;
         this.responseSuccess = true;
@@ -382,10 +315,10 @@ export class LaptopComponent implements OnInit {
     // console.log(this.imageNameFromServer)
     this.pageLoading = true;
     const setFormData = {
-      id: this.laptopFormGroup.get('id').value
+      id: this.userIndexpageFormGroup.get('id').value
     };
 
-    this.laptopservice.deleteItem(setFormData, this.token).subscribe((data: any) => {
+    this.userIndexpageService.deleteItem(setFormData, this.token).subscribe((data: any) => {
       if (data.success) {
         this.pageLoading = false;
 
@@ -403,6 +336,5 @@ export class LaptopComponent implements OnInit {
       window.alert(error.statusText);
     });
   }
-
 
 }
