@@ -41,7 +41,12 @@ export class GroceriesComponent implements OnInit {
     { pricevolume: 'item' },
   ];
 
-  displayedColumns: string[] = ['id', 'name', 'pricevolume', 'price', 'description', 'image', 'edit', 'delete'];
+  type = [
+    { type: 'fruits' },
+    { type: 'vegetables' },
+  ];
+
+  displayedColumns: string[] = ['id', 'name', 'pricevolume', 'price', 'type', 'description', 'image', 'edit', 'delete'];
   dataSource = new MatTableDataSource();
 
   constructor(
@@ -64,6 +69,11 @@ export class GroceriesComponent implements OnInit {
 
 
       price: ['', [
+        Validators.required,
+      ]],
+
+
+      type: ['', [
         Validators.required,
       ]],
 
@@ -137,6 +147,7 @@ export class GroceriesComponent implements OnInit {
     this.groceriesFormGroup.controls.name.setValue(editformvalues.name);
     this.groceriesFormGroup.controls.pricevolume.setValue(editformvalues.pricevolume);
     this.groceriesFormGroup.controls.price.setValue(editformvalues.price);
+    this.groceriesFormGroup.controls.type.setValue(editformvalues.type);
     this.groceriesFormGroup.controls.description.setValue(editformvalues.description);
 
 
@@ -154,6 +165,7 @@ export class GroceriesComponent implements OnInit {
     this.groceriesFormGroup.controls.name.setValue(null);
     this.groceriesFormGroup.controls.pricevolume.setValue(null);
     this.groceriesFormGroup.controls.price.setValue(null);
+    this.groceriesFormGroup.controls.type.setValue(null);
     this.groceriesFormGroup.controls.description.setValue(null);
 
     this.previewUrl = null;
@@ -232,6 +244,7 @@ export class GroceriesComponent implements OnInit {
       image: this.imageNameFromServer,
       name: this.groceriesFormGroup.get('name').value,
       price: this.groceriesFormGroup.get('price').value,
+      type: this.groceriesFormGroup.get('type').value,
       pricevolume: this.groceriesFormGroup.get('pricevolume').value,
       description: this.groceriesFormGroup.get('description').value
     };
@@ -273,6 +286,7 @@ export class GroceriesComponent implements OnInit {
       id: this.groceriesFormGroup.get('id').value,
       name: this.groceriesFormGroup.get('name').value,
       price: this.groceriesFormGroup.get('price').value,
+      type: this.groceriesFormGroup.get('type').value,
       pricevolume: this.groceriesFormGroup.get('pricevolume').value,
       description: this.groceriesFormGroup.get('description').value,
       image: this.imageNameFromServer,

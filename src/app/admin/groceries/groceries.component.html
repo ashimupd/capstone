@@ -26,6 +26,11 @@
       <td class="text-left" mat-cell *matCellDef="let element"> {{element.price}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="type">
+      <th class="text-left" mat-header-cell *matHeaderCellDef> Type </th>
+      <td class="text-left" mat-cell *matCellDef="let element"> {{element.type}} </td>
+    </ng-container>
+
 
     <ng-container matColumnDef="description">
       <th class="text-left" mat-header-cell *matHeaderCellDef> Description </th>
@@ -95,6 +100,13 @@
           <mat-label>Price volume per *</mat-label>
           <mat-select formControlName="pricevolume">
             <mat-option *ngFor="let pricevolume of priceVolume" [value]="pricevolume.pricevolume"> {{pricevolume.pricevolume}} </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Type *</mat-label>
+          <mat-select formControlName="type">
+            <mat-option *ngFor="let item of type" [value]="item.type"> {{item.type}} </mat-option>
           </mat-select>
         </mat-form-field>
 

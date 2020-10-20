@@ -162,7 +162,7 @@
   <!-- Sub menu list -->
   <mat-menu #electronicsMenu="matMenu">
     <button mat-menu-item *ngFor="let menu of ElectronisMenu" style="border: none; outline: none;">
-      <span> <a [routerLink]="['/categories/electronics/'+menu.routerLink]" style="color: black; text-decoration: none;">
+      <span> <a href="/categories/electronics{{menu.routerLink}}" style="color: black; text-decoration: none;">
           {{menu.navLinkLabel}} </a> </span>
     </button>
   </mat-menu>
@@ -170,21 +170,21 @@
 
   <mat-menu #clothingsMenu="matMenu">
     <button mat-menu-item *ngFor="let menu of ClothingsMenu" style="border: none; outline: none;">
-      <span> <a [routerLink]="['/categories/clothings/'+menu.routerLink]" style="color: black; text-decoration: none;">
+      <span> <a href="/categories/clothings{{menu.routerLink}}" style="color: black; text-decoration: none;">
           {{menu.navLinkLabel}} </a> </span>
     </button>
   </mat-menu>
 
   <mat-menu #watchesMenu="matMenu">
     <button mat-menu-item *ngFor="let menu of WatchesMenu" style="border: none; outline: none;">
-      <span> <a [routerLink]="['/categories/watches/'+menu.routerLink]" style="color: black; text-decoration: none;">
+      <span> <a href="/categories/watches{{menu.routerLink}}" style="color: black; text-decoration: none;">
           {{menu.navLinkLabel}} </a> </span>
     </button>
   </mat-menu>
 
   <mat-menu #shoesMenu="matMenu">
     <button mat-menu-item *ngFor="let menu of ShoesMenu" style="border: none; outline: none;">
-      <span> <a [routerLink]="['/categories/shoes/'+menu.routerLink]" style="color: black; text-decoration: none;">
+      <span> <a href="/categories/shoes{{menu.routerLink}}" style="color: black; text-decoration: none;">
           {{menu.navLinkLabel}} </a> </span>
     </button>
   </mat-menu>
@@ -192,7 +192,7 @@
 
   <mat-menu #groceriesMenu="matMenu">
     <button mat-menu-item *ngFor="let menu of GroceriesMenu" style="border: none; outline: none;">
-      <span> <a [routerLink]="['/categories/groceries/'+menu.routerLink]" style="color: black; text-decoration: none;">
+      <span> <a href="/categories/groceries{{menu.routerLink}}" style="color: black; text-decoration: none;">
           {{menu.navLinkLabel}} </a> </span>
     </button>
   </mat-menu>

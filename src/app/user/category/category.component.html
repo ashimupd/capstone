@@ -28,16 +28,17 @@
     </div>
 
 
+    <app-loadingscreen *ngIf="loading"></app-loadingscreen>
 
-    <div class="container-fluid">
+    <div class="container-fluid" *ngIf="!loading">
       <div class="row">
-        <div class="col-sm-3 mt-5 mb-5" *ngFor="let item of sliderImages | slice:0:loadMoreItems;">
+        <div class="col-sm-3 mt-5 mb-5" *ngFor="let item of dataList | slice:0:loadMoreItems;">
           <mat-card>
             <a [routerLink]="['/categories/'+Category.toLowerCase()+'/'+subCategory.toLowerCase()+'/'+ item.id]">
-              <img src="{{item.url}}" class="p-3 w-100">
+              <img [src]="BASE_URL+'upload/images/'+ item.image" class="p-3 w-100">
             </a>
             <div class="w-100"> {{item.name}} </div>
-            <div class="w-100"> Rs. {{item.price}} </div>
+            <div class="w-100"> $ {{item.price}} </div>
             <button mat-raised-button class="btn w-100"> <i class="fa fa-shopping-cart"></i> Add to cart</button>
           </mat-card>
         </div>

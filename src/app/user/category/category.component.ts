@@ -1,3 +1,4 @@
+import { CategoryService } from './category.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -13,23 +14,14 @@ export class CategoryComponent {
   Category: string;
   searchKeyWord = 'name';
 
+  loading = true;
 
 
-  sliderImages = [
-    { id: 1, url: 'assets/images/img1.jpg', price: '500', name: 'abc' },
-    { id: 1, url: 'assets/images/img2.jpg', price: '546', name: 'cbd' },
-    { id: 1, url: 'assets/images/img3.jpg', price: '65465', name: 'efg' },
-    { id: 1, url: 'assets/images/img4.jpg', price: '231', name: 'hij' },
-    { id: 1, url: 'assets/images/img1.jpg', price: '8452', name: 'klm' },
-    { id: 1, url: 'assets/images/img2.jpg', price: '4564', name: 'nop' },
-    { id: 1, url: 'assets/images/img3.jpg', price: '23123', name: 'qrs' },
-    { id: 1, url: 'assets/images/img4.jpg', price: '54', name: 'stu' },
-    { id: 1, url: 'assets/images/img1.jpg', price: '64565', name: 'wvx' },
-    { id: 1, url: 'assets/images/img2.jpg', price: '464', name: 'yz' },
 
-  ];
+  dataList: any;
+  dataList2: any;
 
-  sliderImages2 = this.sliderImages;
+  public BASE_URL = 'http://localhost:2020/';
 
   fnloadMoreItems() {
     this.loadMoreItems = this.loadMoreItems + 4;
@@ -43,11 +35,11 @@ export class CategoryComponent {
     const filterValue = (event.target as HTMLInputElement).value;
 
     if (this.searchKeyWord === 'name') {
-      this.sliderImages = this.sliderImages.filter(result => result.name.toLocaleLowerCase().includes(filterValue.toLocaleLowerCase()));
+      this.dataList = this.dataList.filter(result => result.name.toLocaleLowerCase().includes(filterValue.toLocaleLowerCase()));
     }
 
     else if (this.searchKeyWord === 'price') {
-      this.sliderImages = this.sliderImages.filter(result => result.price.toLocaleLowerCase().includes(filterValue.toLocaleLowerCase()));
+      this.dataList = this.dataList.filter(result => result.price.toLocaleLowerCase().contains(filterValue.toLocaleLowerCase()));
 
     }
 
@@ -56,8 +48,7 @@ export class CategoryComponent {
     if (key === 8 || key === 46) {
 
       if (filterValue === '') {
-        this.sliderImages = this.sliderImages2;
-        console.log(this.sliderImages2)
+        this.dataList = this.dataList2;
       }
     }
 
@@ -67,30 +58,30 @@ export class CategoryComponent {
   sort(event) {
     const sortKeyword = event.target.value;
     if (sortKeyword === '1') {
-      let b = this.sliderImages.sort((a, b) => 0 - (a.name > b.name ? -1 : 1));
-      this.sliderImages = b;
+      let b = this.dataList.sort((a, b) => 0 - (a.name > b.name ? -1 : 1));
+      this.dataList = b;
     }
 
     else if (sortKeyword === '2') {
-      let b = this.sliderImages.sort((a, b) => 0 - (a.name > b.name ? 1 : -1));
-      this.sliderImages = b;
+      let b = this.dataList.sort((a, b) => 0 - (a.name > b.name ? 1 : -1));
+      this.dataList = b;
     }
 
     else if (sortKeyword === '3') {
-      let b = this.sliderImages.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
-      this.sliderImages = b;
+      let b = this.dataList.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+      this.dataList = b;
     }
 
     else if (sortKeyword === '4') {
-      let b = this.sliderImages.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
-      this.sliderImages = b;
+      let b = this.dataList.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+      this.dataList = b;
     }
 
   }
 
 
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private categoryService: CategoryService) { }
 
   ngOnInit(): void {
 
@@ -100,8 +91,43 @@ export class CategoryComponent {
       this.Category = params.get('category').toString().toUpperCase();
     })
 
+
+    if (this.Category.toLocaleLowerCase() === 'electronics') {
+      this.getElectronisItemsByCategory();
+    }
+    else {
+      this.getItemsBySubCategory();
+    }
+
+
   }
 
+  getItemsBySubCategory() {
+    this.categoryService.getItemsBySubCategory(this.Category.toLocaleLowerCase(), this.subCategory.toLocaleLowerCase()).
+      subscribe((data: any) => {
+        if (data.success) {
+          this.loading = false;
+          this.dataList = data.data;
+          this.dataList2 = data.data;
+        }
+        else {
+          this.loading = true;
+        }
+      })
+  }
+
+  getElectronisItemsByCategory() {
+    this.categoryService.getElectronisItemsByCategory(this.subCategory.toLocaleLowerCase()).subscribe((data: any) => {
+      if (data.success) {
+        this.loading = false;
+        this.dataList = data.data;
+        this.dataList2 = data.data;
+      }
+      else {
+        this.loading = true;
+      }
+    })
+  }
 
 
 }

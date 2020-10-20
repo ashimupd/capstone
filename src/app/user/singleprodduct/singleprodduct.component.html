@@ -1,49 +1,75 @@
 <app-navbar></app-navbar>
 
-<section>
+
+<app-loadingscreen *ngIf="loading"></app-loadingscreen>
+
+<section *ngIf="!loading">
+
+
+
   <div class="container product-container p-2">
-    <div class="row">
+    <h3 class="w-100 m-auto text-center" style="color: grey;"> {{category.toUpperCase()}} /
+      {{subCategory.toUpperCase()}} </h3>
+    <div class="row mt-5">
       <div class="image col-sm-4">
-        <img src="assets/images/img1.jpg" alt="">
+        <img *ngIf="dataList.image" [src]="BASE_URL+'upload/images/'+dataList.image" alt="">
       </div>
       <div class="details col-sm-7">
-        <span>
-          <h3>Grey Pant</h3>
+        <span *ngIf="dataList.name">
+          <h3> {{dataList.name}} </h3>
         </span>
-        <span>
-          <h5>Rs. 9500</h5>
-        </span>
-        <span>
-          <h6> 5Gb Ram</h6>
-        </span>
-        <span>
-          <h6> 120v battery </h6>
-        </span>
-        <span>
-          <h6> 5Gb Ram</h6>
-        </span>
-        <span>
-          <h6> 5Gb Ram</h6>
-        </span>
-        <span>
-          <h6> 5Gb Ram</h6>
-        </span>
-        <span>
-          <h6> 5Gb Ram</h6>
 
+        <span *ngIf="dataList.price">
+          <h3> ${{dataList.price}} </h3>
         </span>
-        <span style="font-size: small;">
+
+        <span *ngIf="dataList.brand">
+          <h5> Brand: {{dataList.brand}} </h5>
+        </span>
+
+        <span *ngIf="dataList.model">
+          <h5> Model: {{dataList.model}} </h5>
+        </span>
+
+        <span *ngIf="dataList.ram">
+          <h5> RAM: {{dataList.ram}} GB</h5>
+        </span>
+
+        <span *ngIf="dataList.storage">
+          <h5> Storage: {{dataList.storage}} GB</h5>
+        </span>
+
+        <span *ngIf="dataList.processer">
+          <h5> Processer: {{dataList.processer}} </h5>
+        </span>
+
+        <span *ngIf="dataList.generation">
+          <h5> Generation: {{dataList.generation}} </h5>
+        </span>
+
+        <span *ngIf="dataList.graphics">
+          <h5> Graphics: {{dataList.graphics}} </h5>
+        </span>
+
+        <span *ngIf="dataList.resolution">
+          <h5> Resolution: {{dataList.resolution}} px</h5>
+        </span>
+
+        <span *ngIf="dataList.screensize">
+          <h5> Screen size: {{dataList.screensize}} Inch</h5>
+        </span>
+
+        <span *ngIf="dataList.size">
+          <h5> Size: {{dataList.size}} </h5>
+        </span>
+
+        <span *ngIf="dataList.warrenty">
+          <h5> Warrenty: {{dataList.warrenty}} months </h5>
+        </span>
+
+        <span *ngIf="dataList.description" style="font-size: medium;">
           <hr>
-          This is bran new laptop
-          This is bran new laptop This is bran new laptop
-          This is bran new laptop This is bran new laptop
-          This is bran new laptop This is bran new laptop
-          This is bran new laptop This is bran new laptop
-          This is bran new laptop This is bran new laptop
-          This is bran new laptop This is bran new laptop
-          This is bran new laptop This is bran new laptop
-          This is bran new laptop This is bran new laptop
-          This is bran new laptop This is bran new laptop
+          {{dataList.description}}
         </span>
       </div>
     </div>
@@ -72,6 +98,9 @@
       </div>
     </div>
     <hr>
+
+
+
     <div class="container">
       <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
         <mat-expansion-panel-header>
@@ -89,15 +118,20 @@
                 <button type="button"> <i class="fa fa-send" (click)="postComment()"></i> </button>
               </div>
 
-              <div class="comment w-100 p-3 mt-3 mb-3" style="background-color: lightgrey; border-radius: 30px;"
-                *ngFor="let comment of commentsSample | slice :0:loadComments">
-                <span style="color: #0178D7;">{{comment.name}} :</span>
-                <span> {{comment.comment}} </span> <br>
-                <span style="color: rgb(94, 94, 94); font-size: small;"> {{comment.date}}</span>
+              <app-loadingscreen *ngIf="loadingComments"></app-loadingscreen>
+
+              <div *ngIf="!loadingComments">
+                <div class="comment w-100 p-3 mt-3 mb-3" style="background-color: lightgrey; border-radius: 30px;"
+                  *ngFor="let comment of comments | slice :0:loadComments">
+                  <span style="color: #0178D7;">{{comment.username}} :</span>
+                  <span> {{comment.comments}} </span> <br>
+                  <span style="color: rgb(94, 94, 94); font-size: small;"> {{comment.date}}</span>
+                </div>
               </div>
 
             </div>
-            <button class="text-center w-100 m-auto" mat-stroked-button (click)="loadMoreComments()">Load more ...</button>
+            <button class="text-center w-100 m-auto" mat-stroked-button (click)="loadMoreComments()">Load more
+              ...</button>
           </div>
         </div>
 

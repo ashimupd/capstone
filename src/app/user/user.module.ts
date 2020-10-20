@@ -1,3 +1,5 @@
+import { SingleprodductService } from './singleprodduct/singleprodduct.service';
+import { CategoryService } from './category/category.service';
 import { SignupService } from './signup/signup.service';
 
 import { LoginService } from './login/login.service';
@@ -58,7 +60,7 @@ const routes: Routes = [
 
   },
   {
-    path: 'categories/:category/:subcategory/:productid',
+    path: 'categories/:category/:subcategory/:pid',
     component: SingleprodductComponent
   }
 
@@ -68,7 +70,15 @@ const routes: Routes = [
 
 
 @NgModule({
-  declarations: [IndexComponent, LoginComponent, SignupComponent, ProfileComponent, CartComponent, OrdersComponent, CategoryComponent, SingleprodductComponent],
+  declarations: [
+    IndexComponent,
+    LoginComponent,
+    SignupComponent,
+    ProfileComponent,
+    CartComponent,
+    OrdersComponent,
+    CategoryComponent,
+    SingleprodductComponent],
   imports: [
     SharedModule,
     RouterModule.forChild(routes),
@@ -78,8 +88,8 @@ const routes: Routes = [
     ShareIconsModule,
 
   ],
-  providers:[
-    LoginService, SignupService
+  providers: [
+    LoginService, SignupService, CategoryService, SingleprodductService
   ]
 })
 export class UserModule { }
