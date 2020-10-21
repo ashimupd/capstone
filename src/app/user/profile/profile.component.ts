@@ -1,95 +1,78 @@
+import { ProfileService } from './profile.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent  {
+export class ProfileComponent {
 
   public updateFormGroup: FormGroup;
 
-  districts = [
-    { district: 'Achham' },
-    { district: 'Arghakhanchi' },
-    { district: 'Baglung' },
-    { district: 'Baitadi' },
-    { district: 'Bajhang' },
-    { district: 'Bajura' },
-    { district: 'Banke' },
-    { district: 'Bara' },
-    { district: 'Bardiya' },
-    { district: 'Bhaktapur' },
-    { district: 'Bhojpur' },
-    { district: 'Chitwan' },
-    { district: 'Dadeldhura' },
-    { district: 'Dailekh' },
-    { district: 'Dang' },
-    { district: 'Darchula' },
-    { district: 'Dhading' },
-    { district: 'Dhankuta' },
-    { district: 'Dhanusa' },
-    { district: 'Dolakha' },
-    { district: 'Dolpa' },
-    { district: 'Doti' },
-    { district: 'Gorkha' },
-    { district: 'Gulmi' },
-    { district: 'Humla' },
-    { district: 'Ilam' },
-    { district: 'Jajarkot' },
-    { district: 'Jhapa' },
-    { district: 'Jumla' },
-    { district: 'Kailali' },
-    { district: 'Kalikot' },
-    { district: 'Kanchanpur' },
-    { district: 'Kapilvastu' },
-    { district: 'Kaski' },
-    { district: 'Kathmandu' },
-    { district: 'Kavrepalanchok' },
-    { district: 'Khotang' },
-    { district: 'Lalitpur' },
-    { district: 'Lamjung' },
-    { district: 'Mahottari' },
-    { district: 'Makwanpur' },
-    { district: 'Manang' },
-    { district: 'Morang' },
-    { district: 'Mugu' },
-    { district: 'Mustang' },
-    { district: 'Myagdi' },
-    { district: 'Nawalparasi' },
-    { district: 'Nuwakot' },
-    { district: 'Okhaldhunga' },
-    { district: 'Palpa' },
-    { district: 'Panchthar' },
-    { district: 'Parbat' },
-    { district: 'Parsa' },
-    { district: 'Pyuthan' },
-    { district: 'Ramechhap' },
-    { district: 'Rasuwa' },
-    { district: 'Rautahat' },
-    { district: 'Rolpa' },
-    { district: 'Rukum' },
-    { district: 'Rupandehi' },
-    { district: 'Salyan' },
-    { district: 'Sankhuwasabha' },
-    { district: 'Saptari' },
-    { district: 'Sarlahi' },
-    { district: 'Sindhuli' },
-    { district: 'Sindhupalchok' },
-    { district: 'Siraha' },
-    { district: 'Solukhumbu' },
-    { district: 'Sunsari' },
-    { district: 'Surkhet' },
-    { district: 'Syangja' },
-    { district: 'Tanahu' },
-    { district: 'Taplejung' },
-    { district: 'Terhathum' },
-    { district: 'Udayapur' }
+  states = [
+    { state: 'Alabama' },
+    { state: 'Alaska' },
+    { state: 'Arizona' },
+    { state: 'Arkansas' },
+    { state: 'California' },
+    { state: 'Colorado' },
+    { state: 'Connecticut' },
+    { state: 'Delaware' },
+    { state: 'Florida' },
+    { state: 'Georgia' },
+    { state: 'Hawaii' },
+    { state: 'Idaho' },
+    { state: 'IllinoisIndiana' },
+    { state: 'Iowa' },
+    { state: 'Kansas' },
+    { state: 'Kentucky' },
+    { state: 'Louisiana' },
+    { state: 'Maine' },
+    { state: 'Maryland' },
+    { state: 'Massachusetts' },
+    { state: 'Michigan' },
+    { state: 'Minnesota' },
+    { state: 'Mississippi' },
+    { state: 'Missouri' },
+    { state: 'MontanaNebraska' },
+    { state: 'Nevada' },
+    { state: 'New Hampshire' },
+    { state: 'New Jersey' },
+    { state: 'New Mexico' },
+    { state: 'New York' },
+    { state: 'North Carolina' },
+    { state: 'North Dakota' },
+    { state: 'Ohio' },
+    { state: 'Oklahoma' },
+    { state: 'Oregon' },
+    { state: 'PennsylvaniaRhode Island' },
+    { state: 'South Carolina' },
+    { state: 'South Dakota' },
+    { state: 'Tennessee' },
+    { state: 'Texas' },
+    { state: 'Utah' },
+    { state: 'Vermont' },
+    { state: 'Virginia' },
+    { state: 'Washington' },
+    { state: 'West Virginia' },
+    { state: 'Wisconsin' },
+    { state: 'Wyoming' },
   ];
 
-  constructor(private loginFormBuilder: FormBuilder) {
+  loggedInUserData: any;
+  isUserLoggedIn: any;
+
+  @ViewChild('updateProfileDiagouge') updateProfileDiagouge: TemplateRef<any>;
+  @ViewChild('confirmLogoutDialouge') confirmLogoutDialouge: TemplateRef<any>;
+
+  constructor(private loginFormBuilder: FormBuilder, private dialog: MatDialog, private profileSerice: ProfileService, private _snackBar: MatSnackBar) {
     this.updateFormGroup = this.loginFormBuilder.group({
+
+      id: [''],
 
       fname: ['', [
         Validators.required,
@@ -112,7 +95,7 @@ export class ProfileComponent  {
         Validators.email
       ]],
 
-      district: ['', [
+      state: ['', [
         Validators.required,
       ]],
 
@@ -124,9 +107,58 @@ export class ProfileComponent  {
     })
   }
 
-  submitupdate() {
-    console.log(this.updateFormGroup.value);
+
+  ngOnInit(): void {
+    this.getLoggedInUserData();
+  }
+
+  getLoggedInUserData() {
+    this.loggedInUserData = JSON.parse(window.localStorage.getItem('LOGGEDIN_USER_DATA'));
+    if (this.loggedInUserData) {
+      if (this.loggedInUserData.loggedin) {
+        this.isUserLoggedIn = true;
+        this.updateFormGroup.controls.id.setValue(this.loggedInUserData.userData.data.id);
+        this.updateFormGroup.controls.fname.setValue(this.loggedInUserData.userData.data.fname);
+        this.updateFormGroup.controls.lname.setValue(this.loggedInUserData.userData.data.lname);
+        this.updateFormGroup.controls.phone.setValue(this.loggedInUserData.userData.data.phone);
+        this.updateFormGroup.controls.email.setValue(this.loggedInUserData.userData.data.email);
+        this.updateFormGroup.controls.state.setValue(this.loggedInUserData.userData.data.state);
+        this.updateFormGroup.controls.zip.setValue(this.loggedInUserData.userData.data.zip);
+      }
+    }
   }
 
 
+
+  updateProfile() {
+    this.dialog.open(this.updateProfileDiagouge);
+  }
+
+  confirmUpdate() {
+    console.log(this.updateFormGroup.value)
+
+    this.profileSerice.updateUser(this.updateFormGroup.value, this.loggedInUserData.token).subscribe((data: any) => {
+      if (data.success) {
+
+        this._snackBar.open('Profile updated');
+
+        setTimeout(() => {
+          this.logoutUser();
+        }, 1500);
+      }
+      else {
+        //
+      }
+    })
+
+  }
+
+  logoutUser() {
+    window.localStorage.removeItem('LOGGEDIN_USER_DATA');
+    window.location.href = '/';
+  }
+
+  confirmLogout() {
+    this.dialog.open(this.confirmLogoutDialouge);
+  }
 }

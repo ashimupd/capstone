@@ -7,15 +7,15 @@
 
 
         <div class="user-details">
-          <h5>asim@gmail.com</h5>
-          <h6>Ashim Updahay</h6>
+          <h5> {{loggedInUserData.userData.data.email}} </h5>
+          <h6> {{loggedInUserData.userData.data.fname}} {{loggedInUserData.userData.data.lname}} </h6>
         </div>
 
         <ul class="text-left">
           <li><a  [routerLink]="['/profile']"> <i class="fa fa-user-circle-o"></i> Profile </a> </li>
           <li><a  [routerLink]="['/orders']"  style="color: #F44336;"> <i class="fa fa-first-order"></i> Order history</a></li>
           <li><a  [routerLink]="['/cart']"> <i class="fa fa-shopping-cart"></i> Cart </a></li>
-          <li><a href=""> <i class="fa fa-power-off"></i> Logout </a></li>
+          <li><a style="cursor: pointer;" (click)="confirmLogout()"> <i class="fa fa-power-off"></i> Logout </a></li>
         </ul>
       </div>
       <div class="col-sm-8 ml-1 mt-5 text-center">
@@ -25,6 +25,11 @@
   </div>
 </section>
 
+<ng-template #confirmLogoutDialouge>
+  <h2 matDialogTitle>You sure to logout ? </h2>
+  <button (click)="logoutUser()" class="btn btn-danger float-left">Confirm</button>
+  <button mat-dialog-close class="float-right btn btn-dark">Cancel</button>
+</ng-template>
 
 
 <app-footer></app-footer>

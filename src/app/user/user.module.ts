@@ -1,3 +1,4 @@
+import { CartService } from './cart/cart.service';
 import { SingleprodductService } from './singleprodduct/singleprodduct.service';
 import { CategoryService } from './category/category.service';
 import { SignupService } from './signup/signup.service';
@@ -89,7 +90,7 @@ const routes: Routes = [
 
   ],
   providers: [
-    LoginService, SignupService, CategoryService, SingleprodductService
+    LoginService, SignupService, CategoryService, SingleprodductService, CartService
   ]
 })
 export class UserModule { }

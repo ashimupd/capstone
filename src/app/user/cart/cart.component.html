@@ -6,20 +6,23 @@
       <div class="col-sm-3 profile-nav text-center">
 
         <div class="user-details">
-          <h5>asim@gmail.com</h5>
-          <h6>Ashim Updahay</h6>
+          <h5> {{loggedInUserData.userData.data.email}} </h5>
+          <h6> {{loggedInUserData.userData.data.fname}} {{loggedInUserData.userData.data.lname}} </h6>
         </div>
 
         <ul class="text-left">
           <li><a [routerLink]="['/profile']"> <i class="fa fa-user-circle-o"></i> Profile </a> </li>
           <li><a [routerLink]="['/orders']"> <i class="fa fa-first-order"></i> Order history</a></li>
           <li><a [routerLink]="['/cart']" style="color: #F44336;"> <i class="fa fa-shopping-cart"></i> Cart </a></li>
-          <li><a href=""> <i class="fa fa-power-off"></i> Logout </a></li>
+          <li><a style="cursor: pointer;" (click)="confirmLogout()"> <i class="fa fa-power-off"></i> Logout </a></li>
         </ul>
       </div>
-      <div class="col-sm-8 ml-1 text-center">
+      <app-loadingscreen *ngIf="loadCartData"></app-loadingscreen>
+      <div class="col-sm-8 ml-1 text-center" *ngIf="!loadCartData">
 
         <input (keyup)="applyFilter($event)" placeholder="Search cart list" #input class="SearchFilterInput mb-3">
+
+
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z13 w-100">
 
           <ng-container matColumnDef="id">
@@ -27,15 +30,44 @@
             <td class="text-left" mat-cell *matCellDef="let element"> {{element.id}} </td>
           </ng-container>
 
-          <ng-container matColumnDef="name">
-            <th class="text-left" mat-header-cell *matHeaderCellDef> Name </th>
-            <td class="text-left" mat-cell *matCellDef="let element"> {{element.name}} </td>
+          <ng-container matColumnDef="productname">
+            <th class="text-left" mat-header-cell *matHeaderCellDef> Product name </th>
+            <td class="text-left" mat-cell *matCellDef="let element"> {{element.productname}} </td>
           </ng-container>
 
-          <ng-container matColumnDef="class">
-            <th class="text-left" mat-header-cell *matHeaderCellDef> Class </th>
-            <td class="text-left" mat-cell *matCellDef="let element"> {{element.class}} </td>
+          <ng-container matColumnDef="price">
+            <th class="text-left" mat-header-cell *matHeaderCellDef> Price </th>
+            <td class="text-left" mat-cell *matCellDef="let element"> {{element.price}} </td>
           </ng-container>
+
+          <ng-container matColumnDef="totalitems">
+            <th class="text-left" mat-header-cell *matHeaderCellDef> Total items </th>
+            <td class="text-left" mat-cell *matCellDef="let element"> {{element.totalitems}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="image">
+            <th class="text-left" mat-header-cell *matHeaderCellDef> Image </th>
+            <td class="text-left" mat-cell *matCellDef="let element">
+              <img [src]="BASE_URL+'upload/images/'+element.image" alt="" class="image">
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="remove">
+            <th class="text-left" mat-header-cell *matHeaderCellDef> Remove </th>
+            <td class="text-left" mat-cell *matCellDef="let element">
+              <button mat-button (click)="openDeleteItemFormDiaglouge(element)">
+                <i style="color: red;" class="fa fa-trash fa-2x"></i> </button>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="checkout">
+            <th class="text-left" mat-header-cell *matHeaderCellDef> Checkout </th>
+            <td class="text-left" mat-cell *matCellDef="let element">
+              <button mat-button> <i style="color: orange;" class="fa fa-sign-out fa-2x"></i> </button>
+            </td>
+          </ng-container>
+
+
 
           <tr class="text-left" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr class="text-left" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
@@ -45,13 +77,28 @@
           </tr>
         </table>
 
-        <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100, 200]" showFirstLastButtons></mat-paginator>
 
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100, 200]" showFirstLastButtons></mat-paginator>
+        <button class="btn btn-dark w-100">Checkout all</button>
 
       </div>
     </div>
   </div>
 </section>
+
+<ng-template #deleteClothingConfirmDialouge>
+  <h2 matDialogTitle>Are you sure to delete ? </h2>
+  <button (click)="deleteItem()" class="btn btn-danger float-left">Delete</button>
+  <button mat-dialog-close class="float-right btn btn-dark">Cancel</button>
+</ng-template>
+
+<ng-template #confirmLogoutDialouge>
+  <h2 matDialogTitle>You sure to logout ? </h2>
+  <button (click)="logoutUser()" class="btn btn-danger float-left">Confirm</button>
+  <button mat-dialog-close class="float-right btn btn-dark">Cancel</button>
+</ng-template>
+
 
 
 

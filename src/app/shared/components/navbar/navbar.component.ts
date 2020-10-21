@@ -3,6 +3,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { faUser, faShoppingCart, faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { NavbarService } from './navbar.service';
 
 
 @Component({
@@ -17,6 +18,8 @@ export class NavbarComponent {
   faShoppingCart = faShoppingCart;
   faBars = faBars;
   faTimes = faTimes;
+
+  totalCartItems: any;
 
 
   loggedInUserData: any;
@@ -81,7 +84,7 @@ export class NavbarComponent {
 
 
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private navbarservice: NavbarService) {
   }
 
 
@@ -91,6 +94,7 @@ export class NavbarComponent {
     if (this.loggedInUserData) {
       if (this.loggedInUserData.loggedin) {
         this.isUserLoggedIn = true;
+        this.getCartData();
       }
     }
 
@@ -109,13 +113,22 @@ export class NavbarComponent {
     this.showIcon = !this.showIcon;
   }
 
-  clearSearch() {
-    this.term = null;
-    this.showSearchData = false;
+
+
+  getCartData() {
+    this.navbarservice.getCartdata(this.loggedInUserData.userData.data.id, this.loggedInUserData.token).subscribe((data: any) => {
+
+      if (data.success) {
+        this.totalCartItems = data.data.length;
+
+      }
+    })
   }
 
-
-
+  logoutUser() {
+    window.localStorage.removeItem('LOGGEDIN_USER_DATA');
+    window.location.href = '/';
+  }
 }
 
 

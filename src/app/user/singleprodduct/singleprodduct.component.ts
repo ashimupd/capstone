@@ -1,6 +1,7 @@
 import { SingleprodductService } from './singleprodduct.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-singleprodduct',
@@ -19,7 +20,7 @@ export class SingleprodductComponent implements OnInit {
 
   category: any;
   subCategory: any;
-  pid: any;
+
   loading = true;
 
   dataList: any;
@@ -28,13 +29,21 @@ export class SingleprodductComponent implements OnInit {
   isUserLoggedIn = false;
 
   producttype: any;
+  pid: any;
+  image: any;
+  productname: any;
+  price: any;
 
   loadingComments = false;
+
+  cartLoading = false;
 
 
   public BASE_URL = 'http://localhost:2020/';
 
-  constructor(private route: ActivatedRoute, private singleProductService: SingleprodductService) {
+
+
+  constructor(private route: ActivatedRoute, private singleProductService: SingleprodductService, private _snackBar: MatSnackBar) {
 
   }
 
@@ -69,16 +78,21 @@ export class SingleprodductComponent implements OnInit {
 
     this.getLoggedInUserData();
     this.getUrlParameters();
-    this.getComments();
-
+    if(this.isUserLoggedIn){
+      this.getComments();
+    }
 
   }
 
   getLoggedInUserData() {
     this.loggedInUserData = JSON.parse(window.localStorage.getItem('LOGGEDIN_USER_DATA'));
     if (this.loggedInUserData) {
-      if (this.loggedInUserData.loggedin) {
+      if (this.loggedInUserData.loggedin !== null) {
         this.isUserLoggedIn = true;
+
+      }
+      else {
+        this.isUserLoggedIn = false;
       }
     }
   }
@@ -110,6 +124,9 @@ export class SingleprodductComponent implements OnInit {
         if (data.success) {
           this.loading = false;
           this.dataList = data.data;
+          this.productname = data.data.name;
+          this.price = data.data.price;
+          this.image = data.data.image;
 
         }
         else {
@@ -123,6 +140,9 @@ export class SingleprodductComponent implements OnInit {
       if (data.success) {
         this.loading = false;
         this.dataList = data.data;
+        this.productname = data.data.name;
+        this.price = data.data.price;
+        this.image = data.data.image;
       }
       else {
         this.loading = true;
@@ -162,6 +182,46 @@ export class SingleprodductComponent implements OnInit {
       }
     })
   }
+
+  addToCart() {
+    this.cartLoading = true;
+    let cartData = {
+      productid: this.pid,
+      producttype: this.producttype,
+      productname: this.productname,
+      userid: this.loggedInUserData.userData.data.id,
+      price: this.price,
+      username: this.loggedInUserData.userData.data.fname + ' ' + this.loggedInUserData.userData.data.lname,
+      totalitems: this.totalItems,
+      image: this.image,
+      orderstatus: 'pending'
+    };
+
+    this.singleProductService.addToCart(cartData, this.loggedInUserData.token).subscribe((data: any) => {
+      if (data.success) {
+        this.cartLoading = false;
+
+        let snackBarRef = this._snackBar.open(this.productname + ' added to cart', 'Go to cart', {
+          duration: 5000
+        });
+
+        snackBarRef.onAction().subscribe(() => {
+          window.location.href = '/cart';
+        })
+      }
+
+      else {
+        this._snackBar.open(data.message, '', {
+          duration: 2500
+        });
+      }
+    });
+
+
+
+
+  }
+
 
 }
 

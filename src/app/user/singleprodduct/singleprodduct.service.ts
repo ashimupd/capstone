@@ -35,4 +35,14 @@ export class SingleprodductService {
       })
     });
   }
+
+
+  addToCart(cartData: any, token: any) {
+    return this.http.post(this.url + 'cart', cartData, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'bearer ' + token
+      })
+    });
+  }
 }

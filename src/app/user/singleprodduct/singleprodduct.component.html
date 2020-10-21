@@ -75,14 +75,15 @@
     </div>
     <hr>
     <div class="container mt-2">
-      <div class="row">
+      <div class="row" *ngIf="isUserLoggedIn">
         <div class="col-sm-4 items-count mb-2">
           <button class="btn btn-dark" (click)=minusItems()> <i class="fa fa-minus"></i></button>
           <input type="number" [(ngModel)]="totalItems" min="1" class="m-2" style="text-align:center; border: none;">
           <button class="btn btn-dark" (click)=plusItems()> <i class="fa fa-plus"></i> </button>
         </div>
-        <div class="col-sm-8">
-          <button mat-button class="btn-dark w-100 p-1"> Add to cart</button>
+        <app-loadingscreen *ngIf="cartLoading"></app-loadingscreen>
+        <div class="col-sm-8" *ngIf="!cartLoading">
+          <button mat-button class="btn-dark w-100 p-1" (click)="addToCart()"> Add to cart</button>
         </div>
       </div>
     </div>
@@ -101,7 +102,7 @@
 
 
 
-    <div class="container">
+    <div class="container" *ngIf="isUserLoggedIn">
       <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
         <mat-expansion-panel-header>
           <mat-panel-title>

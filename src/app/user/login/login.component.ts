@@ -2,6 +2,7 @@ import { LoginService } from './login.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,7 @@ export class LoginComponent {
 
   public LoginFormGroup: FormGroup;
 
-  constructor(private loginFormBuilder: FormBuilder, private loginService: LoginService) {
+  constructor(private loginFormBuilder: FormBuilder, private loginService: LoginService, private _snackBar: MatSnackBar) {
     this.LoginFormGroup = this.loginFormBuilder.group({
       email: ['', [
         Validators.required,
@@ -39,9 +40,6 @@ export class LoginComponent {
     this.loginService.submitLogin(this.LoginFormGroup.value).subscribe((userdata: any) => {
       if (userdata.success) {
         this.loading = false;
-        this.responseStatus = false;
-        this.responseStatus = true;
-        this.responseText = userdata.message;
 
         const userSessionData = {
           loggedin: true,
@@ -50,6 +48,14 @@ export class LoginComponent {
         };
 
         localStorage.setItem('LOGGEDIN_USER_DATA', JSON.stringify(userSessionData));
+
+        setTimeout(() => {
+          window.location.href = '/profile';
+        }, 1500);
+
+        this._snackBar.open(' Welcome', userdata.data.fname + ' ' + userdata.data.lname, {
+          duration: 5000
+        });
 
       }
       else {

@@ -1,4 +1,4 @@
-
+import { NavbarService } from './components/navbar/navbar.service';
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -165,6 +165,9 @@ import { LoadingscreenComponent } from './components/loadingscreen/loadingscreen
     FontAwesomeModule,
     FooterComponent,
     LoadingscreenComponent
+  ],
+  providers: [
+    NavbarService
   ]
 })
 export class SharedModule { }
