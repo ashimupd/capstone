@@ -149,7 +149,7 @@ export class ProfileComponent {
       else {
         //
       }
-    })
+    });
 
   }
 

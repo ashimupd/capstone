@@ -22,9 +22,7 @@ export class CartComponent {
 
   cartId: any;
 
-  cartData = [
-    { id: '1', productname: 'asim', price: 'this is his name', totalitems: '1500', image: 'img.jpg' }
-  ];
+
 
   public BASE_URL = 'http://localhost:2020/';
 

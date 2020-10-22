@@ -121,6 +121,7 @@ export class SingleprodductComponent implements OnInit {
   getItemsBySubCategory() {
     this.singleProductService.getItemsBySubCategory(this.category, this.pid).
       subscribe((data: any) => {
+        console.log(data)
         if (data.success) {
           this.loading = false;
           this.dataList = data.data;
@@ -192,6 +193,9 @@ export class SingleprodductComponent implements OnInit {
       userid: this.loggedInUserData.userData.data.id,
       price: this.price,
       username: this.loggedInUserData.userData.data.fname + ' ' + this.loggedInUserData.userData.data.lname,
+      state: this.loggedInUserData.userData.data.state,
+      zip: this.loggedInUserData.userData.data.zip,
+      phone: this.loggedInUserData.userData.data.phone,
       totalitems: this.totalItems,
       image: this.image,
       orderstatus: 'pending'

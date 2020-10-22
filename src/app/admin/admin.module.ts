@@ -1,3 +1,4 @@
+import { UserordersService } from './userorders/userorders.service';
 import { TvService } from './tv/tv.service';
 import { MobilesService } from './mobiles/mobiles.service';
 import { WatchesService } from './watches/watches.service';
@@ -20,6 +21,7 @@ import { WatchesComponent } from './watches/watches.component';
 import { ShoesComponent } from './shoes/shoes.component';
 import { GroceriesComponent } from './groceries/groceries.component';
 import { UserindexpageComponent } from './userindexpage/userindexpage.component';
+import { UserordersComponent } from './userorders/userorders.component';
 
 const routes: Routes = [
   {
@@ -45,6 +47,11 @@ const routes: Routes = [
   {
     path: 'userindexpage',
     component: UserindexpageComponent
+  },
+
+  {
+    path: 'userorders',
+    component: UserordersComponent
   },
 
   {
@@ -80,7 +87,8 @@ const routes: Routes = [
     WatchesComponent,
     ShoesComponent,
     GroceriesComponent,
-    UserindexpageComponent],
+    UserindexpageComponent,
+    UserordersComponent],
   imports: [
     RouterModule.forChild(routes),
     SharedModule,
@@ -94,7 +102,8 @@ const routes: Routes = [
     ShoesService,
     WatchesService,
     MobilesService,
-    TvService
+    TvService,
+    UserordersService
   ]
 })
 export class AdminModule { }

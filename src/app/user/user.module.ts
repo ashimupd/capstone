@@ -1,3 +1,5 @@
+import { CheckoutService } from './checkout/checkout.service';
+import { CheckoutallService } from './checkoutall/checkoutall.service';
 import { CartService } from './cart/cart.service';
 import { SingleprodductService } from './singleprodduct/singleprodduct.service';
 import { CategoryService } from './category/category.service';
@@ -23,6 +25,8 @@ import { CartComponent } from './cart/cart.component';
 import { OrdersComponent } from './orders/orders.component';
 import { CategoryComponent } from './category/category.component';
 import { SingleprodductComponent } from './singleprodduct/singleprodduct.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { CheckoutallComponent } from './checkoutall/checkoutall.component';
 
 
 const routes: Routes = [
@@ -63,9 +67,16 @@ const routes: Routes = [
   {
     path: 'categories/:category/:subcategory/:pid',
     component: SingleprodductComponent
+  },
+
+  {
+    path: 'checkout/:cartid',
+    component: CheckoutComponent
+  },
+  {
+    path: 'checkoutall',
+    component: CheckoutallComponent
   }
-
-
 
 ];
 
@@ -79,7 +90,9 @@ const routes: Routes = [
     CartComponent,
     OrdersComponent,
     CategoryComponent,
-    SingleprodductComponent],
+    SingleprodductComponent,
+    CheckoutComponent,
+    CheckoutallComponent],
   imports: [
     SharedModule,
     RouterModule.forChild(routes),
@@ -90,7 +103,7 @@ const routes: Routes = [
 
   ],
   providers: [
-    LoginService, SignupService, CategoryService, SingleprodductService, CartService
+    LoginService, SignupService, CategoryService, SingleprodductService, CartService, CheckoutService, CheckoutallService
   ]
 })
 export class UserModule { }

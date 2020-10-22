@@ -5,8 +5,6 @@
 
 <section *ngIf="!loading">
 
-
-
   <div class="container product-container p-2">
     <h3 class="w-100 m-auto text-center" style="color: grey;"> {{category.toUpperCase()}} /
       {{subCategory.toUpperCase()}} </h3>
@@ -20,7 +18,7 @@
         </span>
 
         <span *ngIf="dataList.price">
-          <h3> ${{dataList.price}} </h3>
+          <h3> ${{dataList.price}} <span *ngIf="dataList.pricevolume"> / {{dataList.pricevolume}} </span> </h3>
         </span>
 
         <span *ngIf="dataList.brand">

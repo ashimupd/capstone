@@ -34,6 +34,7 @@ export class DashboardComponent {
     iconRegistry.addSvgIcon('shoes', sanitizer.bypassSecurityTrustResourceUrl(this.browseIcons + 'shoes.svg'));
     iconRegistry.addSvgIcon('groceries', sanitizer.bypassSecurityTrustResourceUrl(this.browseIcons + 'groceries.svg'));
     iconRegistry.addSvgIcon('indexpage', sanitizer.bypassSecurityTrustResourceUrl(this.browseIcons + 'indexpage.svg'));
+    iconRegistry.addSvgIcon('userorders', sanitizer.bypassSecurityTrustResourceUrl(this.browseIcons + 'userorders.svg'));
 
   }
 }

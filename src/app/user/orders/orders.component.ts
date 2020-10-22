@@ -1,3 +1,5 @@
+import { OrdersService } from './orders.service';
+import { MatTableDataSource } from '@angular/material/table';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -12,15 +14,28 @@ export class OrdersComponent implements OnInit {
   loggedInUserData: any;
   isUserLoggedIn: any;
 
+  displayedColumns: string[] = ['id', 'productname', 'price', 'totalitems', 'image', 'status'];
+  dataSource = new MatTableDataSource();
+
+  public BASE_URL = 'http://localhost:2020/';
+
+
   @ViewChild('confirmLogoutDialouge') confirmLogoutDialouge: TemplateRef<any>;
 
-  constructor(private dialog: MatDialog){
+  constructor(private dialog: MatDialog, private ordersService: OrdersService) {
 
   }
 
   ngOnInit(): void {
     this.getLoggedInUserData();
+    this.getOrderedData();
   }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
 
   getLoggedInUserData() {
     this.loggedInUserData = JSON.parse(window.localStorage.getItem('LOGGEDIN_USER_DATA'));
@@ -40,5 +55,14 @@ export class OrdersComponent implements OnInit {
   confirmLogout() {
     this.dialog.open(this.confirmLogoutDialouge);
   }
+
+  getOrderedData() {
+    this.ordersService.getUserOrderedData(this.loggedInUserData.userData.data.id, this.loggedInUserData.token).subscribe((data: any) => {
+      if (data.success) {
+        this.dataSource.data = data.data;
+      }
+    })
+  }
+
 
 }
