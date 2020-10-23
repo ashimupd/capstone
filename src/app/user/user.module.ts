@@ -27,6 +27,9 @@ import { CategoryComponent } from './category/category.component';
 import { SingleprodductComponent } from './singleprodduct/singleprodduct.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { CheckoutallComponent } from './checkoutall/checkoutall.component';
+import { IndexService } from './index/index.service';
+import { ProfileService } from './profile/profile.service';
+import { OrdersService } from './orders/orders.service';
 
 
 const routes: Routes = [
@@ -46,36 +49,43 @@ const routes: Routes = [
 
   {
     path: 'profile',
-    component: ProfileComponent
+    component: ProfileComponent,
+
   },
 
   {
     path: 'cart',
-    component: CartComponent
+    component: CartComponent,
+
   },
 
   {
     path: 'orders',
-    component: OrdersComponent
+    component: OrdersComponent,
+
   },
 
   {
     path: 'categories/:category/:subcategory',
     component: CategoryComponent,
 
+
   },
   {
     path: 'categories/:category/:subcategory/:pid',
-    component: SingleprodductComponent
+    component: SingleprodductComponent,
+
   },
 
   {
     path: 'checkout/:cartid',
-    component: CheckoutComponent
+    component: CheckoutComponent,
+
   },
   {
     path: 'checkoutall',
-    component: CheckoutallComponent
+    component: CheckoutallComponent,
+
   }
 
 ];
@@ -103,7 +113,15 @@ const routes: Routes = [
 
   ],
   providers: [
-    LoginService, SignupService, CategoryService, SingleprodductService, CartService, CheckoutService, CheckoutallService
+    LoginService,
+    SignupService,
+    CategoryService,
+    SingleprodductService,
+    CartService, CheckoutService,
+    CheckoutallService,
+    IndexService,
+    ProfileService,
+    OrdersService,
   ]
 })
 export class UserModule { }

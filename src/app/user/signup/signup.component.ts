@@ -2,6 +2,7 @@ import { SignupService } from './signup.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -16,60 +17,63 @@ export class SignupComponent {
   responseText: string;
   loading: any;
 
+  loggedInUserData: any;
+  isUserLoggedIn = false;
+
 
   hide = true;
   weakpassword = false;
   states = [
-    {state: 'Alabama'},
-    {state: 'Alaska'},
-    {state: 'Arizona'},
-    {state: 'Arkansas'},
-    {state: 'California'},
-    {state: 'Colorado'},
-    {state: 'Connecticut'},
-    {state: 'Delaware'},
-    {state: 'Florida'},
-    {state: 'Georgia'},
-    {state: 'Hawaii'},
-    {state: 'Idaho'},
-    {state: 'IllinoisIndiana'},
-    {state: 'Iowa'},
-    {state: 'Kansas'},
-    {state: 'Kentucky'},
-    {state: 'Louisiana'},
-    {state: 'Maine'},
-    {state: 'Maryland'},
-    {state: 'Massachusetts'},
-    {state: 'Michigan'},
-    {state: 'Minnesota'},
-    {state: 'Mississippi'},
-    {state: 'Missouri'},
-    {state: 'MontanaNebraska'},
-    {state: 'Nevada'},
-    {state: 'New Hampshire'},
-    {state: 'New Jersey'},
-    {state: 'New Mexico'},
-    {state: 'New York'},
-    {state: 'North Carolina'},
-    {state: 'North Dakota'},
-    {state: 'Ohio'},
-    {state: 'Oklahoma'},
-    {state: 'Oregon'},
-    {state: 'PennsylvaniaRhode Island'},
-    {state: 'South Carolina'},
-    {state: 'South Dakota'},
-    {state: 'Tennessee'},
-    {state: 'Texas'},
-    {state: 'Utah'},
-    {state: 'Vermont'},
-    {state: 'Virginia'},
-    {state: 'Washington'},
-    {state: 'West Virginia'},
-    {state: 'Wisconsin'},
-    {state: 'Wyoming'},
+    { state: 'Alabama' },
+    { state: 'Alaska' },
+    { state: 'Arizona' },
+    { state: 'Arkansas' },
+    { state: 'California' },
+    { state: 'Colorado' },
+    { state: 'Connecticut' },
+    { state: 'Delaware' },
+    { state: 'Florida' },
+    { state: 'Georgia' },
+    { state: 'Hawaii' },
+    { state: 'Idaho' },
+    { state: 'IllinoisIndiana' },
+    { state: 'Iowa' },
+    { state: 'Kansas' },
+    { state: 'Kentucky' },
+    { state: 'Louisiana' },
+    { state: 'Maine' },
+    { state: 'Maryland' },
+    { state: 'Massachusetts' },
+    { state: 'Michigan' },
+    { state: 'Minnesota' },
+    { state: 'Mississippi' },
+    { state: 'Missouri' },
+    { state: 'MontanaNebraska' },
+    { state: 'Nevada' },
+    { state: 'New Hampshire' },
+    { state: 'New Jersey' },
+    { state: 'New Mexico' },
+    { state: 'New York' },
+    { state: 'North Carolina' },
+    { state: 'North Dakota' },
+    { state: 'Ohio' },
+    { state: 'Oklahoma' },
+    { state: 'Oregon' },
+    { state: 'PennsylvaniaRhode Island' },
+    { state: 'South Carolina' },
+    { state: 'South Dakota' },
+    { state: 'Tennessee' },
+    { state: 'Texas' },
+    { state: 'Utah' },
+    { state: 'Vermont' },
+    { state: 'Virginia' },
+    { state: 'Washington' },
+    { state: 'West Virginia' },
+    { state: 'Wisconsin' },
+    { state: 'Wyoming' },
   ];
 
-  constructor(private signUpFormBuilder: FormBuilder, private signUpService: SignupService) {
+  constructor(private signUpFormBuilder: FormBuilder, private signUpService: SignupService, private _router: Router) {
     this.signupFormGroup = this.signUpFormBuilder.group({
 
       fname: ['', [
@@ -109,6 +113,22 @@ export class SignupComponent {
     })
   }
 
+  getLoggedInUserData() {
+    this.loggedInUserData = JSON.parse(window.localStorage.getItem('LOGGEDIN_USER_DATA'));
+    if (this.loggedInUserData) {
+      if (this.loggedInUserData.loggedin) {
+        this.isUserLoggedIn = true;
+        if (this.loggedInUserData.userData.data.usertype === 'user') {
+          this._router.navigate(['/profile']);
+        }
+
+        else if (this.loggedInUserData.userData.data.usertype === 'admin') {
+          this._router.navigate(['/admin']);
+        }
+      }
+    }
+  }
+
   submitSignup() {
     this.loading = true;
     this.signUpService.sugbmiSignUp(this.signupFormGroup.value).subscribe((userdata: any) => {
@@ -141,5 +161,8 @@ export class SignupComponent {
     });
   }
 
+  ngOnInit(): void {
+    this.getLoggedInUserData();
+  }
 
 }

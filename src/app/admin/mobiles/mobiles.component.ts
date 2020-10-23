@@ -1,3 +1,4 @@
+import { ConfigService } from './../../config.service';
 import { MobilesService } from './mobiles.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -35,7 +36,7 @@ export class MobilesComponent implements OnInit {
 
   openForm = false;
 
-  public BASE_URL = 'http://localhost:2020/';
+  public BASE_URL: string;
 
 
 
@@ -45,7 +46,10 @@ export class MobilesComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private clothingFormBuilder: FormBuilder,
-    private mobileService: MobilesService) {
+    private mobileService: MobilesService,
+    private configService: ConfigService) {
+
+    this.BASE_URL = this.configService.BASE_URL();
 
     this.mobilesFormGroup = this.clothingFormBuilder.group({
 
@@ -114,6 +118,9 @@ export class MobilesComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    this.configService.isUserTryingToAccessAdminPAges();
+
     this.loggedInUserData = JSON.parse(window.localStorage.getItem('LOGGEDIN_USER_DATA'));
     if (this.loggedInUserData === null) {
       this.pageLoading = true;

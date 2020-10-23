@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ConfigService } from 'src/app/config.service';
 
 @Component({
   selector: 'app-watches',
@@ -34,7 +35,7 @@ export class WatchesComponent implements OnInit {
   responseFailed: boolean;
   responseText: string;
 
-  public BASE_URL = 'http://localhost:2020/';
+  public BASE_URL: string;
 
 
 
@@ -50,7 +51,10 @@ export class WatchesComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private clothingFormBuilder: FormBuilder,
-    private watchesService: WatchesService) {
+    private watchesService: WatchesService,
+    private configservice: ConfigService) {
+
+    this.BASE_URL = this.configservice.BASE_URL();
 
     this.watchesFormGroup = this.clothingFormBuilder.group({
 
@@ -98,6 +102,9 @@ export class WatchesComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    this.configservice.isUserTryingToAccessAdminPAges();
+
     this.loggedInUserData = JSON.parse(window.localStorage.getItem('LOGGEDIN_USER_DATA'));
     if (this.loggedInUserData === null) {
       this.pageLoading = true;

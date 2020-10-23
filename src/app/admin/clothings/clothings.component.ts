@@ -1,3 +1,4 @@
+import { ConfigService } from './../../config.service';
 import { element } from 'protractor';
 import { ClothingsService } from './clothings.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -37,7 +38,7 @@ export class ClothingsComponent implements OnInit {
   responseFailed: boolean;
   responseText: string;
 
-  public BASE_URL = 'http://localhost:2020/';
+  public BASE_URL: string;
 
   itemSize = [
     { size: 'xxx-small' },
@@ -61,7 +62,10 @@ export class ClothingsComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private clothingFormBuilder: FormBuilder,
-    private clothingsService: ClothingsService) {
+    private clothingsService: ClothingsService,
+    private configservice: ConfigService) {
+
+    this.BASE_URL = this.configservice.BASE_URL();
 
     this.clothingsFormGroup = this.clothingFormBuilder.group({
 
@@ -112,6 +116,9 @@ export class ClothingsComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    this.configservice.isUserTryingToAccessAdminPAges();
+
     this.loggedInUserData = JSON.parse(window.localStorage.getItem('LOGGEDIN_USER_DATA'));
     if (this.loggedInUserData === null) {
       this.pageLoading = true;

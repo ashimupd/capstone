@@ -1,6 +1,7 @@
 import { CategoryService } from './category.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ConfigService } from 'src/app/config.service';
 
 @Component({
   selector: 'app-category',
@@ -21,7 +22,11 @@ export class CategoryComponent {
   dataList: any;
   dataList2: any;
 
-  public BASE_URL = 'http://localhost:2020/';
+  public BASE_URL: string;
+
+  constructor(private route: ActivatedRoute, private categoryService: CategoryService, private configservice: ConfigService) {
+    this.BASE_URL = this.configservice.BASE_URL();
+  }
 
   fnloadMoreItems() {
     this.loadMoreItems = this.loadMoreItems + 4;
@@ -81,7 +86,7 @@ export class CategoryComponent {
 
 
 
-  constructor(private route: ActivatedRoute, private categoryService: CategoryService) { }
+
 
   ngOnInit(): void {
 

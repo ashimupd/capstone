@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ConfigService } from 'src/app/config.service';
 
 
 @Component({
@@ -27,7 +28,7 @@ export class DashboardComponent {
   ];
 
 
-  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, private http: HttpClient) {
+  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, private http: HttpClient, private configservice: ConfigService) {
     iconRegistry.addSvgIcon('electronics', sanitizer.bypassSecurityTrustResourceUrl(this.browseIcons + 'electronics.svg'));
     iconRegistry.addSvgIcon('clothings', sanitizer.bypassSecurityTrustResourceUrl(this.browseIcons + 'clothings.svg'));
     iconRegistry.addSvgIcon('watches', sanitizer.bypassSecurityTrustResourceUrl(this.browseIcons + 'watches.svg'));
@@ -36,5 +37,9 @@ export class DashboardComponent {
     iconRegistry.addSvgIcon('indexpage', sanitizer.bypassSecurityTrustResourceUrl(this.browseIcons + 'indexpage.svg'));
     iconRegistry.addSvgIcon('userorders', sanitizer.bypassSecurityTrustResourceUrl(this.browseIcons + 'userorders.svg'));
 
+  }
+
+  ngOnInit(): void {
+    this.configservice.isUserTryingToAccessAdminPAges();
   }
 }

@@ -2,6 +2,7 @@ import { SingleprodductService } from './singleprodduct.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ConfigService } from 'src/app/config.service';
 
 @Component({
   selector: 'app-singleprodduct',
@@ -39,12 +40,12 @@ export class SingleprodductComponent implements OnInit {
   cartLoading = false;
 
 
-  public BASE_URL = 'http://localhost:2020/';
+  public BASE_URL: string;
 
 
 
-  constructor(private route: ActivatedRoute, private singleProductService: SingleprodductService, private _snackBar: MatSnackBar) {
-
+  constructor(private route: ActivatedRoute, private singleProductService: SingleprodductService, private _snackBar: MatSnackBar, private configservice: ConfigService) {
+    this.BASE_URL = this.configservice.BASE_URL();
   }
 
   shareButtons = [
@@ -78,7 +79,7 @@ export class SingleprodductComponent implements OnInit {
 
     this.getLoggedInUserData();
     this.getUrlParameters();
-    if(this.isUserLoggedIn){
+    if (this.isUserLoggedIn) {
       this.getComments();
     }
 

@@ -1,3 +1,4 @@
+import { PagenotfoundComponent } from './shared/components/pagenotfound/pagenotfound.component';
 
 import { AdminModule } from './admin/admin.module';
 import { UserModule } from './user/user.module';
@@ -14,6 +15,14 @@ const routes: Routes = [
     path: 'admin',
     loadChildren: () => AdminModule
   },
+  {
+    path: '404',
+    component: PagenotfoundComponent
+  },
+  {
+    path: '**',
+    redirectTo: '/404'
+  }
 
 
 ];

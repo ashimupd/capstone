@@ -1,14 +1,15 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ConfigService } from 'src/app/config.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ProfileService {
 
-  private url = 'http://localhost:2020/';
+  constructor(private http: HttpClient, private configservice: ConfigService) {
+    this.url = this.configservice.BASE_URL();
+  }
+  private url: string;
 
-  constructor(private http: HttpClient) { }
 
 
   updateUser(userData: any, token: any) {

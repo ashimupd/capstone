@@ -1,3 +1,4 @@
+import { ConfigService } from './../../config.service';
 import { UserindexpageService } from './userindexpage.service';
 
 import { MatPaginator } from '@angular/material/paginator';
@@ -35,7 +36,7 @@ export class UserindexpageComponent implements OnInit {
   responseFailed: boolean;
   responseText: string;
 
-  public BASE_URL = 'http://localhost:2020/';
+  public BASE_URL: string;
 
 
   type = [
@@ -50,7 +51,10 @@ export class UserindexpageComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private userIndexpageFormBuilder: FormBuilder,
-    private userIndexpageService: UserindexpageService) {
+    private userIndexpageService: UserindexpageService,
+    private configservice: ConfigService) {
+
+    this.BASE_URL = this.configservice.BASE_URL();
 
     this.userIndexpageFormGroup = this.userIndexpageFormBuilder.group({
 
@@ -95,6 +99,9 @@ export class UserindexpageComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    this.configservice.isUserTryingToAccessAdminPAges();
+
     this.loggedInUserData = JSON.parse(window.localStorage.getItem('LOGGEDIN_USER_DATA'));
     if (this.loggedInUserData === null) {
       this.pageLoading = true;

@@ -55,8 +55,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FooterComponent } from './components/footer/footer.component';
 import { NgSpinKitModule } from 'ng-spin-kit';
 import { LoadingscreenComponent } from './components/loadingscreen/loadingscreen.component';
+import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 @NgModule({
-  declarations: [NavbarComponent, FooterComponent, LoadingscreenComponent],
+  declarations: [NavbarComponent, FooterComponent, LoadingscreenComponent, PagenotfoundComponent],
   imports: [
     CommonModule,
     HttpClientModule,

@@ -2,6 +2,7 @@ import { IndexService } from './index.service';
 import { Component, OnInit } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { ConfigService } from 'src/app/config.service';
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
@@ -9,7 +10,8 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 })
 export class IndexComponent {
 
-  constructor(private indexService: IndexService) {
+  constructor(private indexService: IndexService, private configservice: ConfigService) {
+    this.BASE_URL = this.configservice.BASE_URL();
 
   }
 
@@ -19,7 +21,7 @@ export class IndexComponent {
 
   loadMoreBestSales = 4;
 
-  public BASE_URL = 'http://localhost:2020/'
+  public BASE_URL: string;
 
   // tslint:disable-next-line: member-ordering
   mainSliderOptions: OwlOptions = {

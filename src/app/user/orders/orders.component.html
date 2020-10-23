@@ -77,5 +77,13 @@
   </div>
 </section>
 
+<ng-template #confirmLogoutDialouge>
+  <h2 matDialogTitle>You sure to logout ? </h2>
+  <button (click)="logoutUser()" class="btn btn-danger float-left">Confirm</button>
+  <button mat-dialog-close class="float-right btn btn-dark">Cancel</button>
+</ng-template>
+
+
+
 
 <app-footer></app-footer>

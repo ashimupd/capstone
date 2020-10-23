@@ -2,6 +2,7 @@ import { OrdersService } from './orders.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ConfigService } from 'src/app/config.service';
 
 @Component({
   selector: 'app-orders',
@@ -17,12 +18,13 @@ export class OrdersComponent implements OnInit {
   displayedColumns: string[] = ['id', 'productname', 'price', 'totalitems', 'image', 'status'];
   dataSource = new MatTableDataSource();
 
-  public BASE_URL = 'http://localhost:2020/';
+  public BASE_URL: string;
 
 
   @ViewChild('confirmLogoutDialouge') confirmLogoutDialouge: TemplateRef<any>;
 
-  constructor(private dialog: MatDialog, private ordersService: OrdersService) {
+  constructor(private dialog: MatDialog, private ordersService: OrdersService, private configService: ConfigService) {
+    this.BASE_URL = this.configService.BASE_URL();
 
   }
 

@@ -1,3 +1,4 @@
+import { ConfigService } from './../../config.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { TabletService } from './../tablet/tablet.service';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
@@ -36,7 +37,7 @@ export class TabletComponent implements OnInit {
 
   openForm = false;
 
-  public BASE_URL = 'http://localhost:2020/';
+  public BASE_URL: string;
 
 
 
@@ -46,7 +47,10 @@ export class TabletComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private clothingFormBuilder: FormBuilder,
-    private tabletservice: TabletService) {
+    private tabletservice: TabletService,
+    private configservice: ConfigService) {
+
+    this.BASE_URL = this.configservice.BASE_URL();
 
     this.tabletFormGroup = this.clothingFormBuilder.group({
 
@@ -115,6 +119,9 @@ export class TabletComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    this.configservice.isUserTryingToAccessAdminPAges();
+
     this.loggedInUserData = JSON.parse(window.localStorage.getItem('LOGGEDIN_USER_DATA'));
     if (this.loggedInUserData === null) {
       this.pageLoading = true;

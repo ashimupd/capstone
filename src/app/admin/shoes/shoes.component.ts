@@ -1,3 +1,4 @@
+import { ConfigService } from './../../config.service';
 import { ShoesService } from './shoes.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -33,7 +34,7 @@ export class ShoesComponent implements OnInit {
   responseFailed: boolean;
   responseText: string;
 
-  public BASE_URL = 'http://localhost:2020/';
+  public BASE_URL: string;
 
   itemSize = [
     { size: '35' },
@@ -61,7 +62,10 @@ export class ShoesComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private shoesFormBuilder: FormBuilder,
-    private shoesService: ShoesService) {
+    private shoesService: ShoesService,
+    private configservice: ConfigService) {
+
+    this.BASE_URL = this.configservice.BASE_URL();
 
     this.shoesFormGroup = this.shoesFormBuilder.group({
 
@@ -109,6 +113,9 @@ export class ShoesComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    this.configservice.isUserTryingToAccessAdminPAges();
+
     this.loggedInUserData = JSON.parse(window.localStorage.getItem('LOGGEDIN_USER_DATA'));
     if (this.loggedInUserData === null) {
       this.pageLoading = true;

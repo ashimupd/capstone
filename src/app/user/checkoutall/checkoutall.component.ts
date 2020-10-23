@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { CheckoutallService } from './checkoutall.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ConfigService } from 'src/app/config.service';
 
 @Component({
   selector: 'app-checkoutall',
@@ -10,7 +11,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./checkoutall.component.scss']
 })
 export class CheckoutallComponent implements OnInit {
-  constructor(private route: ActivatedRoute, private checkoutService: CheckoutallService, private snackbar: MatSnackBar, private dialog: MatDialog) { }
+  constructor(
+    private route: ActivatedRoute,
+    private checkoutService: CheckoutallService,
+    private snackbar: MatSnackBar,
+    private dialog: MatDialog,
+    private configservice: ConfigService) {
+    this.BASE_URL = this.configservice.BASE_URL();
+  }
 
   cartid: any;
   loggedInUserData: any;
@@ -21,7 +29,7 @@ export class CheckoutallComponent implements OnInit {
   totalAmountToPay = 0;
   payNowLoading = false;
 
-  public BASE_URL = 'http://localhost:2020/';
+  public BASE_URL: string;
 
   cardFormValidation: true;
   cardFormValidationMessage: any;

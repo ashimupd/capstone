@@ -1,3 +1,4 @@
+import { ConfigService } from './../../config.service';
 import { TvService } from './tv.service';
 
 import { MatSort } from '@angular/material/sort';
@@ -36,7 +37,7 @@ export class TvComponent implements OnInit {
 
   openForm = false;
 
-  public BASE_URL = 'http://localhost:2020/';
+  public BASE_URL: string;
 
 
   type = [
@@ -51,7 +52,10 @@ export class TvComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private clothingFormBuilder: FormBuilder,
-    private tvservice: TvService) {
+    private tvservice: TvService,
+    private configservice: ConfigService) {
+
+    this.BASE_URL = this.configservice.BASE_URL();
 
     this.tvFormGroup = this.clothingFormBuilder.group({
 
@@ -116,6 +120,9 @@ export class TvComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    this.configservice.isUserTryingToAccessAdminPAges();
+
     this.loggedInUserData = JSON.parse(window.localStorage.getItem('LOGGEDIN_USER_DATA'));
     if (this.loggedInUserData === null) {
       this.pageLoading = true;

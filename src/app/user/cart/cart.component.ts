@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
+import { ConfigService } from 'src/app/config.service';
 
 @Component({
   selector: 'app-cart',
@@ -24,14 +25,14 @@ export class CartComponent {
 
 
 
-  public BASE_URL = 'http://localhost:2020/';
+  public BASE_URL: string;
 
 
   @ViewChild('deleteClothingConfirmDialouge') deleteClothingConfirmDialouge: TemplateRef<any>;
   @ViewChild('confirmLogoutDialouge') confirmLogoutDialouge: TemplateRef<any>;
 
-  constructor(private cartservice: CartService, public dialog: MatDialog) {
-
+  constructor(private cartservice: CartService, public dialog: MatDialog, private configservice: ConfigService) {
+    this.BASE_URL = this.configservice.BASE_URL();
   }
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;

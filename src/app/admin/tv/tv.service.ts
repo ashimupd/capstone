@@ -1,12 +1,14 @@
+import { ConfigService } from './../../config.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable()
 export class TvService {
 
-  constructor(private http: HttpClient) { }
-
-  private url = 'http://localhost:2020/';
+  constructor(private http: HttpClient, private configservice: ConfigService) {
+    this.url = this.configservice.BASE_URL();
+  }
+  private url: string;
 
   // tslint:disable-next-line: typedef
   uploadImage(tvImage) {

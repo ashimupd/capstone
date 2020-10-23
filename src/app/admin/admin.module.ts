@@ -1,3 +1,5 @@
+
+
 import { UserordersService } from './userorders/userorders.service';
 import { TvService } from './tv/tv.service';
 import { MobilesService } from './mobiles/mobiles.service';
@@ -22,6 +24,8 @@ import { ShoesComponent } from './shoes/shoes.component';
 import { GroceriesComponent } from './groceries/groceries.component';
 import { UserindexpageComponent } from './userindexpage/userindexpage.component';
 import { UserordersComponent } from './userorders/userorders.component';
+import { TabletService } from './tablet/tablet.service';
+
 
 const routes: Routes = [
   {
@@ -30,28 +34,28 @@ const routes: Routes = [
   },
   {
     path: 'clothings',
-    component: ClothingsComponent
+    component: ClothingsComponent,
   },
   {
     path: 'shoes',
-    component: ShoesComponent
+    component: ShoesComponent,
   },
   {
     path: 'watches',
-    component: WatchesComponent
+    component: WatchesComponent,
   },
   {
     path: 'groceries',
-    component: GroceriesComponent
+    component: GroceriesComponent,
   },
   {
     path: 'userindexpage',
-    component: UserindexpageComponent
+    component: UserindexpageComponent,
   },
 
   {
     path: 'userorders',
-    component: UserordersComponent
+    component: UserordersComponent,
   },
 
   {
@@ -59,19 +63,19 @@ const routes: Routes = [
     children: [
       {
         path: 'mobiles',
-        component: MobilesComponent
+        component: MobilesComponent,
       },
       {
         path: 'laptop',
-        component: LaptopComponent
+        component: LaptopComponent,
       },
       {
         path: 'tablet',
-        component: TabletComponent
+        component: TabletComponent,
       },
       {
         path: 'tv',
-        component: TvComponent
+        component: TvComponent,
       },
     ]
   }
@@ -103,7 +107,8 @@ const routes: Routes = [
     WatchesService,
     MobilesService,
     TvService,
-    UserordersService
+    UserordersService,
+    TabletService,
   ]
 })
 export class AdminModule { }

@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { ConfigService } from 'src/app/config.service';
 
 @Component({
   selector: 'app-userorders',
@@ -24,13 +25,14 @@ export class UserordersComponent {
 
 
 
-  public BASE_URL = 'http://localhost:2020/';
+  public BASE_URL: string;
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
 
-  constructor(private userordersservice: UserordersService, public dialog: MatDialog) {
+  constructor(private userordersservice: UserordersService, public dialog: MatDialog, private configservice: ConfigService) {
+    this.BASE_URL = this.configservice.BASE_URL();
 
   }
 
@@ -40,6 +42,7 @@ export class UserordersComponent {
   }
 
   ngOnInit(): void {
+    this.configservice.isUserTryingToAccessAdminPAges();
 
     this.getLoggedInUserData();
     this.getCartData();

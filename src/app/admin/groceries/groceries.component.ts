@@ -1,3 +1,4 @@
+import { ConfigService } from './../../config.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { GroceriesService } from './../groceries/groceries.service';
@@ -33,7 +34,7 @@ export class GroceriesComponent implements OnInit {
   responseFailed: boolean;
   responseText: string;
 
-  public BASE_URL = 'http://localhost:2020/';
+  public BASE_URL: string;
 
 
   priceVolume = [
@@ -52,7 +53,9 @@ export class GroceriesComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private groceriesFormBuilder: FormBuilder,
-    private groceriesService: GroceriesService) {
+    private groceriesService: GroceriesService,
+    private configservice: ConfigService) {
+    this.BASE_URL = this.configservice.BASE_URL();
 
     this.groceriesFormGroup = this.groceriesFormBuilder.group({
 
@@ -103,6 +106,9 @@ export class GroceriesComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    this.configservice.isUserTryingToAccessAdminPAges();
+
     this.loggedInUserData = JSON.parse(window.localStorage.getItem('LOGGEDIN_USER_DATA'));
     if (this.loggedInUserData === null) {
       this.pageLoading = true;
@@ -249,7 +255,7 @@ export class GroceriesComponent implements OnInit {
       description: this.groceriesFormGroup.get('description').value
     };
 
-    console.log({setFormData});
+    console.log({ setFormData });
 
     this.groceriesService.addItem(setFormData, this.token).subscribe((data: any) => {
       if (data.success) {

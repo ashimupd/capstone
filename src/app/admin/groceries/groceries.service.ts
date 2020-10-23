@@ -1,11 +1,14 @@
+import { ConfigService } from './../../config.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable()
 export class GroceriesService {
 
-  constructor(private http: HttpClient) { }
-  private url = 'http://localhost:2020/';
+  constructor(private http: HttpClient, private configservice: ConfigService) {
+    this.url = this.configservice.BASE_URL();
+  }
+  private url: string;
 
   // tslint:disable-next-line: typedef
   uploadImage(groceriesImage) {
@@ -31,7 +34,7 @@ export class GroceriesService {
   }
 
   deleteItem(clothindData, token) {
-    return this.http.delete(this.url + 'groceries/' + clothindData.id,  {
+    return this.http.delete(this.url + 'groceries/' + clothindData.id, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: 'bearer ' + token

@@ -1,12 +1,15 @@
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ConfigService } from 'src/app/config.service';
 
 @Injectable()
 export class CheckoutallService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private configservice: ConfigService) {
+    this.url = this.configservice.BASE_URL();
+  }
+  private url: string;
 
-  private url = 'http://localhost:2020/';
 
 
   getCartdata(userid: any, token: any) {

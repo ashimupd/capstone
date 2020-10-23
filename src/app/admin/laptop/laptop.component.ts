@@ -1,3 +1,4 @@
+import { ConfigService } from './../../config.service';
 import { LaptopService } from './laptop.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
@@ -36,7 +37,7 @@ export class LaptopComponent implements OnInit {
 
   openForm = false;
 
-  public BASE_URL = 'http://localhost:2020/';
+  public BASE_URL: string;
 
 
 
@@ -46,7 +47,10 @@ export class LaptopComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private clothingFormBuilder: FormBuilder,
-    private laptopservice: LaptopService) {
+    private laptopservice: LaptopService,
+    private configservice: ConfigService) {
+
+    this.BASE_URL = this.configservice.BASE_URL();
 
     this.laptopFormGroup = this.clothingFormBuilder.group({
 
@@ -83,7 +87,7 @@ export class LaptopComponent implements OnInit {
       graphics: ['', [
         Validators.required,
       ]],
-    
+
       resolution: ['', [
         Validators.required,
       ]],
@@ -127,6 +131,9 @@ export class LaptopComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    this.configservice.isUserTryingToAccessAdminPAges();
+
     this.loggedInUserData = JSON.parse(window.localStorage.getItem('LOGGEDIN_USER_DATA'));
     if (this.loggedInUserData === null) {
       this.pageLoading = true;

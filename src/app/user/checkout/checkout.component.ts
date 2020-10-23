@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
+import { ConfigService } from 'src/app/config.service';
 
 @Component({
   selector: 'app-checkout',
@@ -12,7 +13,14 @@ import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
 })
 export class CheckoutComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private checkoutService: CheckoutService, private snackbar: MatSnackBar, private dialog: MatDialog) { }
+  constructor(
+    private route: ActivatedRoute,
+    private checkoutService: CheckoutService,
+    private snackbar: MatSnackBar,
+    private dialog: MatDialog,
+    private configservice: ConfigService) {
+    this.BASE_URL = this.configservice.BASE_URL();
+  }
 
   cartid: any;
   loggedInUserData: any;
@@ -21,7 +29,7 @@ export class CheckoutComponent implements OnInit {
   totalAmountToPay;
   payNowLoading = false;
 
-  public BASE_URL = 'http://localhost:2020/';
+  public BASE_URL: string;
 
   cardFormValidation: true;
   cardFormValidationMessage: any;
@@ -57,12 +65,14 @@ export class CheckoutComponent implements OnInit {
     this.date.getFullYear() + 18,
     this.date.getFullYear() + 19,
     this.date.getFullYear() + 20,
-  ]
+  ];
 
   paymentMethodChoosen: string;
   paymentMethods = [{ name: 'paypal', color: '#000000', faIcon: 'fa-cc-visa' }];
 
   @ViewChild('enterCardDetailsDialouge') enterCardDetailsDialouge: TemplateRef<any>;
+
+
 
   ngOnInit(): void {
     this.getUrlParameters();
@@ -174,7 +184,5 @@ export class CheckoutComponent implements OnInit {
     })
   }
 
-  arrayOne(n: number): any[] {
-    return Array(n);
-  }
+
 }
