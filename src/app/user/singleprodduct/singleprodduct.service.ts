@@ -30,13 +30,8 @@ export class SingleprodductService {
     });
   }
 
-  getComments(producttype: any, productid: any, token: any) {
-    return this.http.get(this.url + 'comment/' + producttype + '/' + productid, {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: 'bearer ' + token
-      })
-    });
+  getComments(producttype: any, productid: any) {
+    return this.http.get(this.url + 'comment/' + producttype + '/' + productid);
   }
 
 

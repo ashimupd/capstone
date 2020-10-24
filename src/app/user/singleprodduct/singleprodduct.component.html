@@ -73,7 +73,7 @@
     </div>
     <hr>
     <div class="container mt-2">
-      <div class="row" *ngIf="isUserLoggedIn">
+      <div class="row">
         <div class="col-sm-4 items-count mb-2">
           <button class="btn btn-dark" (click)=minusItems()> <i class="fa fa-minus"></i></button>
           <input type="number" [(ngModel)]="totalItems" min="1" class="m-2" style="text-align:center; border: none;">
@@ -100,7 +100,7 @@
 
 
 
-    <div class="container" *ngIf="isUserLoggedIn">
+    <div class="container">
       <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
         <mat-expansion-panel-header>
           <mat-panel-title>
@@ -112,10 +112,13 @@
           <div class="row comments-container">
             <div class="comment-details w-100">
 
-              <div class="post-comment w-100  p-3">
+              <div class="post-comment w-100  p-3" *ngIf="isUserLoggedIn">
                 <input type="text" [(ngModel)]="commentText" class="comment-user" placeholder="Type your comment . . .">
                 <button type="button"> <i class="fa fa-send" (click)="postComment()"></i> </button>
               </div>
+
+              <div class="w-100 m-auto text-center" *ngIf="!isUserLoggedIn"> Please login to post a comment <span> <a
+                    routerLink="['/login']" style="color: blue;"> Login</a> </span> </div>
 
               <app-loadingscreen *ngIf="loadingComments"></app-loadingscreen>
 

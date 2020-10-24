@@ -79,9 +79,7 @@ export class SingleprodductComponent implements OnInit {
 
     this.getLoggedInUserData();
     this.getUrlParameters();
-    if (this.isUserLoggedIn) {
-      this.getComments();
-    }
+    this.getComments();
 
   }
 
@@ -177,8 +175,9 @@ export class SingleprodductComponent implements OnInit {
 
   getComments() {
     this.loadingComments = true;
-    this.singleProductService.getComments(this.producttype, this.pid, this.loggedInUserData.token).subscribe((data: any) => {
+    this.singleProductService.getComments(this.producttype, this.pid).subscribe((data: any) => {
       if (data.success) {
+        console.log(data)
         this.loadingComments = false;
         this.comments = data.data;
       }
@@ -186,41 +185,56 @@ export class SingleprodductComponent implements OnInit {
   }
 
   addToCart() {
-    this.cartLoading = true;
-    let cartData = {
-      productid: this.pid,
-      producttype: this.producttype,
-      productname: this.productname,
-      userid: this.loggedInUserData.userData.data.id,
-      price: this.price,
-      username: this.loggedInUserData.userData.data.fname + ' ' + this.loggedInUserData.userData.data.lname,
-      state: this.loggedInUserData.userData.data.state,
-      zip: this.loggedInUserData.userData.data.zip,
-      phone: this.loggedInUserData.userData.data.phone,
-      totalitems: this.totalItems,
-      image: this.image,
-      orderstatus: 'pending'
-    };
 
-    this.singleProductService.addToCart(cartData, this.loggedInUserData.token).subscribe((data: any) => {
-      if (data.success) {
-        this.cartLoading = false;
+    if (this.isUserLoggedIn) {
 
-        let snackBarRef = this._snackBar.open(this.productname + ' added to cart', 'Go to cart', {
-          duration: 5000
-        });
+      this.cartLoading = true;
+      let cartData = {
+        productid: this.pid,
+        producttype: this.producttype,
+        productname: this.productname,
+        userid: this.loggedInUserData.userData.data.id,
+        price: this.price,
+        username: this.loggedInUserData.userData.data.fname + ' ' + this.loggedInUserData.userData.data.lname,
+        state: this.loggedInUserData.userData.data.state,
+        zip: this.loggedInUserData.userData.data.zip,
+        phone: this.loggedInUserData.userData.data.phone,
+        totalitems: this.totalItems,
+        image: this.image,
+        orderstatus: 'pending'
+      };
 
-        snackBarRef.onAction().subscribe(() => {
-          window.location.href = '/cart';
-        })
-      }
+      this.singleProductService.addToCart(cartData, this.loggedInUserData.token).subscribe((data: any) => {
+        if (data.success) {
+          this.cartLoading = false;
 
-      else {
-        this._snackBar.open(data.message, '', {
-          duration: 2500
-        });
-      }
-    });
+          let snackBarRef = this._snackBar.open(this.productname + ' added to cart', 'Go to cart', {
+            duration: 5000
+          });
+
+          snackBarRef.onAction().subscribe(() => {
+            window.location.href = '/cart';
+          })
+        }
+
+        else {
+          this._snackBar.open(data.message, '', {
+            duration: 2500
+          });
+        }
+      });
+    }
+    else {
+      let snackBarRef = this._snackBar.open('Please Login to continue', 'Click here to login', {
+        duration: 5000
+      });
+
+      snackBarRef.onAction().subscribe(() => {
+        window.location.href = '/Login';
+      })
+
+    }
+
 
 
 
