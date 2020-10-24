@@ -177,7 +177,6 @@ export class SingleprodductComponent implements OnInit {
     this.loadingComments = true;
     this.singleProductService.getComments(this.producttype, this.pid).subscribe((data: any) => {
       if (data.success) {
-        console.log(data)
         this.loadingComments = false;
         this.comments = data.data;
       }
