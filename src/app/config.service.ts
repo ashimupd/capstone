@@ -8,7 +8,7 @@ export class ConfigService {
 
   constructor(private _router: Router) { }
 
-  private BACKEND_URL = 'http://localhost:2020/'
+  private BACKEND_URL = 'ashimupd.xyz/'
   loggedInUserData: any;
 
   public BASE_URL(): string {
