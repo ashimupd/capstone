@@ -42,12 +42,14 @@
 
       <mat-form-field appearance="outline" class="w-100">
         <mat-label> Processer * </mat-label>
-        <input matInput placeholder="Enter processer detail (Eg: I5 processer, AMD processer) *" type="text" formControlName="processer">
+        <input matInput placeholder="Enter processer detail (Eg: I5 processer, AMD processer) *" type="text"
+          formControlName="processer">
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="w-100">
         <mat-label> Generation * </mat-label>
-        <input matInput placeholder="Enter generation (Eg: 6th gen, 9th gen) *" type="text" formControlName="generation">
+        <input matInput placeholder="Enter generation (Eg: 6th gen, 9th gen) *" type="text"
+          formControlName="generation">
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="w-100">
@@ -109,7 +111,8 @@
 
 
   <hr>
-<!-- data table -->
+  <!-- data table -->
+  <a class="btn btn-dark float-left mb-2" href="/admin"> Go to dashboard </a>
   <button class="btn btn-dark float-right mb-2" (click)="openAddItemFormDiaglouge()">Add new item </button>
   <input (keyup)="applyFilter($event)" placeholder="Search laptop list" #input class="SearchFilterInput mb-3">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z13 w-100" *ngIf="!pageLoading">
@@ -147,17 +150,17 @@
 
     <ng-container matColumnDef="processer">
       <th class="text-left" mat-header-cell *matHeaderCellDef> Processer </th>
-      <td class="text-left" mat-cell *matCellDef="let element"> {{element.processer}}  </td>
+      <td class="text-left" mat-cell *matCellDef="let element"> {{element.processer}} </td>
     </ng-container>
 
     <ng-container matColumnDef="generation">
       <th class="text-left" mat-header-cell *matHeaderCellDef> Generation </th>
-      <td class="text-left" mat-cell *matCellDef="let element"> {{element.generation}}  </td>
+      <td class="text-left" mat-cell *matCellDef="let element"> {{element.generation}} </td>
     </ng-container>
 
     <ng-container matColumnDef="graphics">
       <th class="text-left" mat-header-cell *matHeaderCellDef> Praphics </th>
-      <td class="text-left" mat-cell *matCellDef="let element"> {{element.graphics}}  </td>
+      <td class="text-left" mat-cell *matCellDef="let element"> {{element.graphics}} </td>
     </ng-container>
 
 

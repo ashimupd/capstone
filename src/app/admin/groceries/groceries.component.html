@@ -1,6 +1,7 @@
 <app-loadingscreen *ngIf="pageLoading"></app-loadingscreen>
 
 <section class="ml-1 mr-1 mt-2">
+  <a class="btn btn-dark float-left mb-2" href="/admin"> Go to dashboard </a>
   <button class="btn btn-dark float-right mb-2" (click)="openAddItemFormDiaglouge()">Add new item </button>
   <input (keyup)="applyFilter($event)" placeholder="Search groceries list" #input class="SearchFilterInput mb-3">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z13 w-100" *ngIf="!pageLoading">
