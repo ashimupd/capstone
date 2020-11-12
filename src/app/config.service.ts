@@ -8,9 +8,10 @@ export class ConfigService {
 
   constructor(private _router: Router) { }
 
+
   private BACKEND_URL = 'https://ashimupd.xyz/';
 
-  
+
 
   loggedInUserData: any;
 

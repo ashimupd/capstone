@@ -240,6 +240,13 @@ export class SingleprodductComponent implements OnInit {
 
   }
 
+  enterComment(event) {
+    const key = event.keyCode || event.charCode;
+    if (key === 13) {
+      this.postComment();
+    }
+
+  }
 
 }
 

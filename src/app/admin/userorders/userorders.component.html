@@ -1,5 +1,7 @@
 <section>
+
   <div class="col-sm-12  text-center" *ngIf="!loadCartData">
+    <a class="btn btn-dark float-left mb-2" href="/admin"> Go to dashboard </a>
 
     <input (keyup)="applyFilter($event)" placeholder="Search order list" #input class="SearchFilterInput mb-3">
 

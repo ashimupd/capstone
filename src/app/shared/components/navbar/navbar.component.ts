@@ -33,6 +33,8 @@ export class NavbarComponent {
   // showMenu = true;
   public innerWidth: any;
 
+  isAdmin = false;
+
   items = [
     { name: 'archie', image: 'assets/images/img1.jpg' },
     { name: 'jake', image: 'assets/images/img2.jpg' },
@@ -95,6 +97,9 @@ export class NavbarComponent {
       if (this.loggedInUserData.loggedin) {
         this.isUserLoggedIn = true;
         this.getCartData();
+        if (this.loggedInUserData.userData.data.usertype === 'admin') {
+          this.isAdmin = true;
+        }
       }
     }
 

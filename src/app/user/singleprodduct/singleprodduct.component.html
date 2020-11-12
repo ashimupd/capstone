@@ -113,7 +113,7 @@
             <div class="comment-details w-100">
 
               <div class="post-comment w-100  p-3" *ngIf="isUserLoggedIn">
-                <input type="text" [(ngModel)]="commentText" class="comment-user" placeholder="Type your comment . . .">
+                <input type="text" (keyup)=enterComment($event) [(ngModel)]="commentText" class="comment-user" placeholder="Type your comment . . .">
                 <button type="button"> <i class="fa fa-send" (click)="postComment()"></i> </button>
               </div>
 
